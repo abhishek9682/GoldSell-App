@@ -55,7 +55,7 @@ class _BuyGoldSuccessScreenState extends State<BuyGoldSuccessScreen> {
   Widget build(BuildContext context) {
     final data = widget.goldPurchaseData;
     String now = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
+    print('sucess buy response--------${data.amountPaid}');
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       body: SafeArea(
@@ -148,24 +148,24 @@ class _BuyGoldSuccessScreenState extends State<BuyGoldSuccessScreen> {
                       const SizedBox(height: 12),
 
                       _buildDetailRow( TokenStorage.translate('Amount Paid'),
-                          '₹${data.amountPaid.toStringAsFixed(2)}'),
+                          '₹${data.amountPaid}'),
                       const SizedBox(height: 12),
 
                       _buildDetailRow(TokenStorage.translate("Payment Method"), widget.paymentMethod),
                       const SizedBox(height: 12),
 
-                      _buildDetailRow(TokenStorage.translate('New Total Holdings'),
-                          '${data.goldBalance.toStringAsFixed(3)} grams'),
-                      const SizedBox(height: 12),
-
+                      // _buildDetailRow(TokenStorage.translate('New Total Holdings'),
+                      //     '${data.goldBalance.toStringAsFixed(3)} grams'),
+                      // const SizedBox(height: 12),
+                      //
                       _buildDetailRow(TokenStorage.translate('Portfolio Value'),
                           '₹${data.goldValue.toStringAsFixed(2)}'),
                       const SizedBox(height: 12),
 
-                      _buildDetailRow(TokenStorage.translate('GST'), '₹${data.gstAmount.toStringAsFixed(2)}'),
+                      _buildDetailRow(TokenStorage.translate("GST (%)"), '₹${data.gstAmount.toStringAsFixed(2)}'),
                       const SizedBox(height: 12),
 
-                      _buildDetailRow( TokenStorage.translate('TDS'), '₹${data.tdsAmount.toStringAsFixed(2)}'),
+                      _buildDetailRow( TokenStorage.translate("TDS (%)"), '₹${data.tdsAmount.toStringAsFixed(2)}'),
                       const SizedBox(height: 12),
 
                       _buildDetailRow( TokenStorage.translate('Total Tax'),
@@ -267,57 +267,6 @@ class _BuyGoldSuccessScreenState extends State<BuyGoldSuccessScreen> {
         Text(value,
             style: AppTextStyles.subInputText.copyWith(color: Colors.white)),
       ],
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1))),
-      ),
-      child: SafeArea(
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(0, Icons.home, TokenStorage.translate("Home")),
-              _buildNavItem(1, Icons.account_balance_wallet, TokenStorage.translate("Wallet")),
-              _buildNavItem(2, Icons.history, TokenStorage.translate("Transaction History")),
-              _buildNavItem(3, Icons.person, TokenStorage.translate("Profile")),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, IconData icon, String label) {
-    final isSelected = _selectedNavIndex == index;
-    return InkWell(
-      onTap: () => _onNavItemTapped(index),
-      borderRadius: BorderRadius.circular(12),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon,
-                color: isSelected ? const Color(0xFFFFD700) : Colors.white60,
-                size: 24),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: AppTextStyles.bodyText.copyWith(
-                color: isSelected ? const Color(0xFFFFD700) : Colors.white60,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                fontSize: 11,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

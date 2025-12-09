@@ -8,8 +8,7 @@ class BuyGold with ChangeNotifier {
   GoldPurchaseResponse? _paymentInitiationRequest;
   String? mess="";
 
-  GoldPurchaseResponse? get paymentInitiationRequest =>
-      _paymentInitiationRequest;
+  GoldPurchaseResponse? get paymentInitiationRequest => _paymentInitiationRequest;
 
   final ApiClient apiClient = ApiClient();
 
@@ -24,8 +23,8 @@ class BuyGold with ChangeNotifier {
       final response = await apiClient.PostMethod(buyGolds, body);
 
       print("Buy Gold response:------- $response");
-      print("Buy Gold response keys: ${response.keys}");
-      print("Buy Gold response status value: ${response["status"]}");
+      // print("Buy Gold response keys: ${response.keys}");
+      // print("Buy Gold response status value: ${response["status"]}");
 
       if (response != null && response["status"]== "success") {
         _paymentInitiationRequest = GoldPurchaseResponse.fromJson(response);

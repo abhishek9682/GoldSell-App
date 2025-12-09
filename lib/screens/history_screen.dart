@@ -216,7 +216,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            txn.createdAt ?? "",
+            txn.createdAt?.replaceAll(".000000Z", "") ?? "",
             style: TextStyle(fontSize: 12,
               color: Colors.white60,),
           ),

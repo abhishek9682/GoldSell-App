@@ -107,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen>  with RouteAware{
           return checkLanguage();
         },
         child: SingleChildScrollView(
-          //physics: const BouncingScrollPhysics(),
+
           child: Column(
             children: [
               _buildProfileHeader(),

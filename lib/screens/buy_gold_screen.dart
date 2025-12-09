@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
 import '../compenent/custom_style.dart';
+import '../controllers/BuyGoldconvert.dart';
 import '../controllers/buy_gold.dart';
 import '../controllers/gold_conversion.dart';
 import '../controllers/sell_gold.dart';
@@ -50,7 +51,7 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
 
 
   loadData() {
-    Provider.of<GoldDetails>(context,listen: false);
+    Provider.of<BuyGoldConversion>(context,listen: false);
     final profileProvider = Provider.of<ProfileDetailsProvider>(context, listen: false);
     final goldRatePerGramString = profileProvider.profileData?.data?.profile?.currentGoldPricePerGram ?? '0';
     profileData=profileProvider.profileData!.data!;
@@ -111,20 +112,20 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
   Future<void> _updateGoldCalculation() async {
     final amount = double.tryParse(_amountController.text) ?? 0;
 
-    final provider = Provider.of<GoldDetails>(context, listen: false);
+    final provider = Provider.of<BuyGoldConversion>(context, listen: false);
 
     Map<String, String> body = {
       "type": "inr_to_grams",
       "amount": "$amount"
     };
 
-    await provider.goldDetails(body);
+    await provider.buyGoldConvert(body);
 
-    final response = provider.goldCalculationResponse;
-
-    if (response != null && response.data?.grams != null) {
+    final response = provider.BuyGoldResponse;
+     print("------$response");
+    if (response != null && response.data?.goldGrams != null) {
       setState(() {
-        _calculatedGold = double.tryParse(response.data!.grams!) ?? 0.0;
+        _calculatedGold = double.tryParse(response.data!.goldGrams!) ?? 0.0;
       });
     }
   }
@@ -133,23 +134,23 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
   double? _calculateGold() {
     final amount = double.tryParse(_amountController.text) ?? 0;
 
-    final provider = Provider.of<GoldDetails>(context, listen: false);
+    final provider = Provider.of<BuyGoldConversion>(context, listen: false);
     Map<String, String> body = {
       "type": "inr_to_grams",
       "amount": "$amount"
     };
 
-    provider.goldDetails(body);
+    provider.buyGoldConvert(body);
 
-    final response = provider.goldCalculationResponse;
-
+    final response = provider.BuyGoldResponse;
+  print("+++++++   $response");
     if (response == null ||
         response.data == null ||
-        response.data!.grams == null) {
+        response.data!.goldGrams == null) {
       return 0.0; // return default instead of crashing
     }
 
-    return double.tryParse(response.data!.grams!) ?? 0.0;
+    return double.tryParse(response.data!.goldGrams!) ?? 0.0;
   }
 
 
@@ -168,7 +169,7 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
     if (amount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(TokenStorage.translate('Please enter a valid amount')),
+          content: Text(TokenStorage.translate('Please enter a valid amount Min 15₹')),
           backgroundColor: Colors.red,
         ),
       );
@@ -574,51 +575,6 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
 
 
     ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1))),
-      ),
-      child: SafeArea(
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(0, Icons.home, TokenStorage.translate("Home")),
-              _buildNavItem(1, Icons.account_balance_wallet, TokenStorage.translate("Wallet")),
-              _buildNavItem(2, Icons.history, TokenStorage.translate("Transaction History")),
-              _buildNavItem(3, Icons.person, TokenStorage.translate("Profile")),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, IconData icon, String label) {
-    final isSelected = _selectedNavIndex == index;
-    return InkWell(
-      onTap: () => _onNavItemTapped(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon,
-              color: isSelected ? const Color(0xFFFFD700) : Colors.white60),
-          const SizedBox(height: 4),
-          Text(label,
-              style: GoogleFonts.poppins(
-                  color:
-                  isSelected ? const Color(0xFFFFD700) : Colors.white60,
-                  fontWeight:
-                  isSelected ? FontWeight.w600 : FontWeight.normal,
-                  fontSize: 11)),
-        ],
-      ),
     );
   }
 }

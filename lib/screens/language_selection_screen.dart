@@ -165,7 +165,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        language.shortName!.toUpperCase(),
+                                        (language.langCode ?? language.shortName ?? "?").toUpperCase(),
                                         style: AppTextStyles.heading.copyWith(
                                           fontSize: 26,
                                           color: isSelected
@@ -186,14 +186,15 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                                           : Colors.white,
                                     ),
                                   ),
-                                  // Text(
-                                  //   language.shortName!,
-                                  //   style: AppTextStyles.bodyText.copyWith(
-                                  //     color: isSelected
-                                  //         ? const Color(0xFFFFD700)
-                                  //         : Colors.white,
-                                  //   ),
-                                  // ),
+                                  SizedBox(height: 5,),
+                                  Text(
+                                    language.nativeName ?? '',
+                                    style: AppTextStyles.bodyText.copyWith(
+                                      color: isSelected
+                                          ? const Color(0xFFFFD700)
+                                          : Colors.white,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

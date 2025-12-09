@@ -35,8 +35,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(90),
-                  child: Image.asset(
-                    'assets/images/logo.png',
+                  child: Image.asset('assets/images/logo.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -49,7 +48,6 @@ class WelcomeScreen extends StatelessWidget {
                 'Meera Gold',
                 style: AppTextStyles.heading,
               ),
-
               const SizedBox(height: 8),
 
               // Subtitle
@@ -57,7 +55,6 @@ class WelcomeScreen extends StatelessWidget {
                 'DIGITAL GOLD',
                 style: AppTextStyles.subHeading,
               ),
-
               const SizedBox(height: 60),
 
               // Features Row
@@ -69,7 +66,6 @@ class WelcomeScreen extends StatelessWidget {
                   _buildFeature(icon: Icons.flash_on, label: 'Instant'),
                 ],
               ),
-
               const Spacer(),
 
               // Get Started Button

@@ -20,7 +20,7 @@ class GoldPurchaseResponse {
 class GoldPurchaseData {
   final String trxId;
   final double goldGramsPurchased;
-  final double goldBalance;
+  final String goldBalance;          // ✔ string
   final double goldValue;
   final double gstAmount;
   final double tdsAmount;
@@ -42,19 +42,24 @@ class GoldPurchaseData {
     required this.message,
   });
 
+  // 🔥 SUPER SAFE number cleaner
+  static double cleanDouble(dynamic value) {
+    if (value == null) return 0.0;
+    return double.tryParse(value.toString().replaceAll(",", "")) ?? 0.0;
+  }
+
   factory GoldPurchaseData.fromJson(Map<String, dynamic> json) {
     return GoldPurchaseData(
       trxId: json['trx_id']?.toString() ?? '',
-      goldGramsPurchased: double.tryParse(json['gold_grams_purchased']?.toString() ?? '0') ?? 0.0,
-      goldBalance: double.tryParse(json['gold_balance']?.toString() ?? '0') ?? 0.0,
-      goldValue: double.tryParse(json['gold_value']?.toString() ?? '0') ?? 0.0,
-      gstAmount: double.tryParse(json['gst_amount']?.toString() ?? '0') ?? 0.0,
-      tdsAmount: double.tryParse(json['tds_amount']?.toString() ?? '0') ?? 0.0,
-      tcsAmount: double.tryParse(json['tcs_amount']?.toString() ?? '0') ?? 0.0,
-      totalTaxAmount: double.tryParse(json['total_tax_amount']?.toString() ?? '0') ?? 0.0,
-      amountPaid: double.tryParse(json['amount_paid']?.toString() ?? '0') ?? 0.0,
+      goldGramsPurchased: cleanDouble(json['gold_grams']),
+      goldBalance: json['gold_balance']?.toString() ?? "0",   // ✔ now string
+      goldValue: cleanDouble(json['gold_value']),
+      gstAmount: cleanDouble(json['gst_amount']),
+      tdsAmount: cleanDouble(json['tds_amount']),
+      tcsAmount: cleanDouble(json['tcs_amount']),
+      totalTaxAmount: cleanDouble(json['total_tax_amount']),
+      amountPaid: cleanDouble(json['total_amount']),          // ✔ FIXED
       message: json['message']?.toString() ?? '',
     );
   }
-
 }

@@ -592,7 +592,7 @@ class PlanDetailScreen extends StatelessWidget {
 
                       final now = DateTime.now();
                       final formatted =
-                          "${now.year}-${now.month}-${now.day} ${now.hour}:${now.minute}:${now.second}";
+                          "${now.year}-${now.month}-${now.day} ${now.hour}:${now.minute}"; // :${now.second}
 
                       final body = {
                         "invest_plan_mobile_id": planId,
@@ -620,8 +620,7 @@ class PlanDetailScreen extends StatelessWidget {
                           ),
                         );
 
-                        final plansProvider =
-                        context.read<InvestmentPlansProvider>();
+                        final plansProvider = context.read<InvestmentPlansProvider>();
                         await plansProvider.getInvestmentPlans();
 
                         Navigator.pushAndRemoveUntil(

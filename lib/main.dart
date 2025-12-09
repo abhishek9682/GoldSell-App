@@ -6,6 +6,7 @@ import 'package:goldproject/screens/Privacy_Policy_screen.dart';
 import 'package:goldproject/utils/token_storage.dart';
 import 'package:provider/provider.dart';
 import 'compenent/snackbar.dart';
+import 'controllers/BuyGoldconvert.dart';
 import 'controllers/Delete_Bank.dart';
 import 'controllers/InvestmentPlansProvider.dart';
 import 'controllers/Term_condition.dart';
@@ -69,6 +70,7 @@ void main() async{
       ChangeNotifierProvider(create: (_) => LanguageDataProvider()),
       ChangeNotifierProvider(create: (_) => TermsConditionsProvider()),
       ChangeNotifierProvider(create: (_) => BannerProvider()),
+      ChangeNotifierProvider(create: (_) => BuyGoldConversion()),
    ],
      child: const MeeraGoldApp(),)
   );

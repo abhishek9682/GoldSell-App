@@ -138,7 +138,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final profileProvider = Provider.of<ProfileDetailsProvider>(context);
+    // final profileProvider = Provider.of<ProfileDetailsProvider>(context);
     final plansProvider = Provider.of<InvestmentPlansProvider>(context);
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),

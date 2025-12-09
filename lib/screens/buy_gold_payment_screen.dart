@@ -7,8 +7,10 @@ import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
 import '../compenent/custom_style.dart';
+import '../controllers/BuyGoldconvert.dart';
 import '../controllers/buy_gold.dart';
 import '../controllers/gold_conversion.dart';
+import '../models/Guy_Gold_convert.dart';
 import '../models/convert_gold_or_money.dart';
 import 'dashboard_screen.dart';
 import 'wallet_screen.dart';
@@ -36,7 +38,7 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
   final double gstRate = 0.03;
   bool isPayment=false;
   bool isLoading=false;
-  late GoldCalculationData goldData;
+  GoldCalculation? goldData;
 
   void _onNavItemTapped(int index) {
     if (index == 0) {
@@ -95,11 +97,10 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
         "supported_currency": "INR"
       };
 
-      print("body is $body");
-
       bool success = await provider.buyGold(body);
-      provider.paymentInitiationRequest?.data?.trxId;
-      print("buy response__---$success---${provider.loading}");
+      // provider.paymentInitiationRequest?.data?.trxId;
+
+      print("buy response__---$success---${ provider.paymentInitiationRequest?.data?.amountPaid}");
       setState(() {
         isPayment = false;
       });
@@ -117,7 +118,8 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
       }
       else
         {
-          SnackBar(content: Text("${TokenStorage.translate("Payment Breakdown")} ${provider.mess}"),backgroundColor: Colors.green,);
+          SnackBar(content: Text("${TokenStorage.translate("Payment Breakdown")} ${provider.mess}"),
+            backgroundColor: Colors.green,);
 
         }
     }
@@ -132,26 +134,40 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
 
   getData() async {
     setState(() {
-      isLoading=true;
+      isLoading = true;
     });
-    final provider = Provider.of<GoldDetails>(context, listen: false);
-    Map<String, String> body = {
-      "type": "grams_to_inr",
-      "amount":widget.goldAmount.toString()
-    };
 
-    await provider.goldDetails(body);
-    goldData = provider.goldCalculationResponse!.data!;
+    try {
+      final provider = Provider.of<BuyGoldConversion>(context, listen: false);
+      print("============amount :${widget.goldAmount}");
+      Map<String, String> body = {
+        "amount": widget.cashAmount.toString()
+      };
+
+      await provider.buyGoldConvert(body);
+
+      if (provider.BuyGoldResponse != null &&
+          provider.BuyGoldResponse!.data != null) {
+        goldData = provider.BuyGoldResponse!.data!;
+      } else {
+        goldData = GoldCalculation(); // EMPTY FALLBACK
+      }
+    } catch (e) {
+      print("Gold Conversion Error: $e");
+      goldData = GoldCalculation(); // PREVENT CRASH
+    }
+
     setState(() {
-      isLoading=false;
+      isLoading = false;
     });
   }
+
 
 
   @override
   Widget build(BuildContext context) {
     final profileProvider=Provider.of<ProfileDetailsProvider>(context);
-    //final provider = Provider.of<GoldDetails>(context);
+    print("----------${goldData?.goldGrams}");
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       appBar: CustomAppBar(
@@ -204,25 +220,25 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              _buildDetailRow(TokenStorage.translate("Gold (Grams)"), goldData.grams ?? "0"),
+              _buildDetailRow(TokenStorage.translate("Gold (Grams)"), goldData?.goldGrams ?? "0"),
               const SizedBox(height: 12),
 
-              _buildDetailRow(TokenStorage.translate("Gold Price / Gram"), '₹${goldData.goldPricePerGram ?? "0"}'),
+              _buildDetailRow(TokenStorage.translate("Gold Price / Gram"), '₹${goldData?.goldPricePerGram ?? "0"}'),
               const SizedBox(height: 12),
 
-              _buildDetailRow(TokenStorage.translate("Gross Amount"), '₹${goldData.grossAmount ?? "0"}'),
+              _buildDetailRow(TokenStorage.translate("Gold value"), '₹${goldData?.goldValue ?? "0"}'),
               const SizedBox(height: 12),
 
-              _buildDetailRow('${TokenStorage.translate("GST")} (${goldData.gstPercentage ?? "0"}%)', '₹${goldData?.gstAmount ?? "0"}'),
+              _buildDetailRow('${TokenStorage.translate( "GST")} (${goldData?.gstPercentage ?? "0"})', '₹${goldData?.gstAmount ?? "0"}'),
               const SizedBox(height: 12),
 
               _buildDetailRow('${TokenStorage.translate("TDS")} (${goldData?.tdsPercentage ?? "0"}%)', '₹${goldData?.tdsAmount ?? "0"}'),
               const SizedBox(height: 12),
 
-              _buildDetailRow('${TokenStorage.translate("TCS")} (${goldData?.tcsPercentage ?? "0"}%)', '₹${goldData?.tcsAmount ?? "0"}'),
+              _buildDetailRow('${TokenStorage.translate("TCS (%)")} (${goldData?.tcsPercentage ?? "0"}%)', '₹${goldData?.tcsAmount ?? "0"}'),
               const SizedBox(height: 12),
 
-              _buildDetailRow(TokenStorage.translate("Total Deductions"), '₹${goldData?.totalDeductions ?? "0"}'),
+              _buildDetailRow(TokenStorage.translate("Total Tax"), '₹${goldData?.totalTaxAmount ?? "0"}'),
               const SizedBox(height: 12),
 
               const Divider(color: Colors.white12),
@@ -230,7 +246,7 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
 
               _buildDetailRow(
                 TokenStorage.translate("Net Amount Payable"),
-                '₹${goldData.netAmount ?? "0"}',
+                '₹${goldData?.amountEntered ?? "0"}',
                 isBold: true,
               ),
             ],
@@ -253,36 +269,36 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
 
             const SizedBox(height: 12),
 
-            _buildPaymentMethodCard(
-              icon: '🏦',
-              title: TokenStorage.translate( "Net Banking"),
-              subtitle: TokenStorage.translate("Pay via your bank account"),
-              account: TokenStorage.translate("All major banks supported"),
-              isSelected: _selectedPaymentMethod == 1,
-              onTap: () => setState(() => _selectedPaymentMethod = 1),
-            ),
-
-            const SizedBox(height: 12),
-
-            _buildPaymentMethodCard(
-              icon: '💳',
-              title: TokenStorage.translate( "Debit/Credit Card"),
-              subtitle: TokenStorage.translate("Visa, Mastercard, RuPay"),
-              account: TokenStorage.translate("Visa, Mastercard, RuPay"),
-              isSelected: _selectedPaymentMethod == 2,
-              onTap: () => setState(() => _selectedPaymentMethod = 2),
-            ),
-
-            const SizedBox(height: 12),
-
-            _buildPaymentMethodCard(
-              icon: '💰',
-              title: TokenStorage.translate("Meera Wallet"),
-              subtitle: TokenStorage.translate("Pay from wallet balance"),
-              account: 'Balance: ₹1,280',
-              isSelected: _selectedPaymentMethod == 3,
-              onTap: () => setState(() => _selectedPaymentMethod = 3),
-            ),
+            // _buildPaymentMethodCard(
+            //   icon: '🏦',
+            //   title: TokenStorage.translate( "Net Banking"),
+            //   subtitle: TokenStorage.translate("Pay via your bank account"),
+            //   account: TokenStorage.translate("All major banks supported"),
+            //   isSelected: _selectedPaymentMethod == 1,
+            //   onTap: () => setState(() => _selectedPaymentMethod = 1),
+            // ),
+            //
+            // const SizedBox(height: 12),
+            //
+            // _buildPaymentMethodCard(
+            //   icon: '💳',
+            //   title: TokenStorage.translate( "Debit/Credit Card"),
+            //   subtitle: TokenStorage.translate("Visa, Mastercard, RuPay"),
+            //   account: TokenStorage.translate("Visa, Mastercard, RuPay"),
+            //   isSelected: _selectedPaymentMethod == 2,
+            //   onTap: () => setState(() => _selectedPaymentMethod = 2),
+            // ),
+            //
+            // const SizedBox(height: 12),
+            //
+            // _buildPaymentMethodCard(
+            //   icon: '💰',
+            //   title: TokenStorage.translate("Meera Wallet"),
+            //   subtitle: TokenStorage.translate("Pay from wallet balance"),
+            //   account: 'Balance: ₹1,280',
+            //   isSelected: _selectedPaymentMethod == 3,
+            //   onTap: () => setState(() => _selectedPaymentMethod = 3),
+            // ),
 
             const SizedBox(height: 24),
 
