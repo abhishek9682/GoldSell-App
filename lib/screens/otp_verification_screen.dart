@@ -5,7 +5,7 @@ import 'package:goldproject/screens/dashboard_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/custom_style.dart';
-import '../controllers/otp_response.dart';
+import '../controllers/otp_resend.dart';
 import '../controllers/varify_otp.dart';
 import '../utils/token_storage.dart';
 import 'complete_profile_screen.dart';
@@ -120,11 +120,16 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   }
 
   void _resendOTP() async {
-    if (!_canResend) return; // safety guard
+    if (!_canResend) return;
 
-    final provider = Provider.of<OtpProvider>(context, listen: false);
+    final provider = Provider.of<OtpResendProvider>(context, listen: false);
 
-    bool success = await provider.sendOtp(widget.phoneNumber);
+    Map<String, dynamic> body = {
+      "phone": widget.phoneNumber,
+      "otp": ""
+    };
+
+    bool success = await provider.otpResend(body);
 
     if (!mounted) return;
 
@@ -134,9 +139,8 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
         _canResend = false;
       });
 
-      startTimer(); // restart timer
+      startTimer();
 
-      // Clear OTP input
       for (var c in _otpControllers) {
         c.clear();
       }
@@ -153,7 +157,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-         provider.otpResponse?.data?.message ?? "Failed to resend OTP",
+            provider.otpResponse?["data"] ?? "Failed to resend OTP",
             style: GoogleFonts.poppins(color: Colors.white),
           ),
           backgroundColor: Colors.red,
@@ -170,109 +174,107 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-          
-                // Lock Icon
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFD700),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Center(
-                    child: Icon(
-                      Icons.lock_outline,
-                      size: 50,
-                      color: Color(0xFF0A0A0A),
-                    ),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              // Lock Icon
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFD700),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.lock_outline,
+                    size: 50,
+                    color: Color(0xFF0A0A0A),
                   ),
                 ),
-          
-                const SizedBox(height: 30),
-          
-                Text(TokenStorage.translate(TokenStorage.translate("Verify Your OTP")),
-                    style: AppTextStyles.loginHeading),
-                // const SizedBox(height: 10),
-                // Subtitle
-                Text(
-                  'Enter code sent to mobile',
-                  style: AppTextStyles.loginSubHeading,
-                ),
-                const SizedBox(height: 30),
-                RichText(
-                  text: TextSpan(
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: Colors.white60,
-                    ),
-                    children: [
-                      const TextSpan(text: 'Code sent to\n'),
-                      TextSpan(
-                        text: '+91 ${widget.phoneNumber}',
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          color: const Color(0xFFFFD700),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
+              ),
+
+              const SizedBox(height: 30),
+
+              Text(TokenStorage.translate(TokenStorage.translate("Verify Your OTP")),
+                  style: AppTextStyles.loginHeading),
+              // const SizedBox(height: 10),
+              // Subtitle
+              Text(
+                'Enter code sent to mobile',
+                style: AppTextStyles.loginSubHeading,
+              ),
+              const SizedBox(height: 30),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    color: Colors.white60,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 30),
-          
-                // 🔥 4 OTP BOXES
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(
-                    4,
-                        (i) => _buildOTPBox(i),
-                  ),
-                ),
-          
-                const SizedBox(height: 20),
-          
-                // TIMER & RESEND
-                _canResend
-                    ? TextButton(
-                  onPressed: _resendOTP,
-                  child: Text("Resend OTP", style: AppTextStyles.bodyText),
-                )
-                    : Flexible(
-                      child: Text("Resend OTP in 00:$_secondsRemaining sec",
-                                    style: AppTextStyles.bodyText,
-                                  ),
-                    ),
-          
-                const SizedBox(height: 20),
-          
-                // VERIFY BUTTON
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed:
-                    _isOTPComplete() && !otpProvider.isLoading ? verifyOTP : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFD700),
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  children: [
+                    const TextSpan(text: 'Code sent to\n'),
+                    TextSpan(
+                      text: '+91 ${widget.phoneNumber}',
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        color: const Color(0xFFFFD700),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    child: otpProvider.isLoading
-                        ? CustomLoader()
-                        : Text(TokenStorage.translate("Verify Your OTP"), style: AppTextStyles.buttonText),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+
+              // 🔥 4 OTP BOXES
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(
+                  4,
+                      (i) => _buildOTPBox(i),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // TIMER & RESEND
+              _canResend
+                  ? TextButton(
+                onPressed: _resendOTP,
+                child: Text("Resend OTP", style: AppTextStyles.bodyText),
+              )
+                  : Flexible(
+                    child: Text("Resend OTP in 00:$_secondsRemaining sec",
+                                  style: AppTextStyles.bodyText,
+                                ),
+                  ),
+
+              const SizedBox(height: 20),
+
+              // VERIFY BUTTON
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed:
+                  _isOTPComplete() && !otpProvider.isLoading ? verifyOTP : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFFD700),
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: otpProvider.isLoading
+                      ? CustomLoader()
+                      : Text(TokenStorage.translate("Verify Your OTP"), style: AppTextStyles.buttonText),
+                ),
+              ),
+            ],
           ),
         ),
       ),

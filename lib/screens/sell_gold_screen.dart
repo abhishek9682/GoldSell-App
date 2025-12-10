@@ -181,7 +181,7 @@ class _SellGoldScreenState extends State<SellGoldScreen> {
       final gramsStr = provider.goldCalculationResponse!.data!.grams; // String?
       final grams = double.tryParse(gramsStr ?? "0") ?? 0; // convert → double
       setState(() {
-        _goldController.text = grams.toStringAsFixed(3);
+        _goldController.text = grams.toString();
       });
     }
   }
@@ -198,9 +198,10 @@ class _SellGoldScreenState extends State<SellGoldScreen> {
 
     if (provider.goldCalculationResponse != null) {
       final amountStr = provider.goldCalculationResponse!.data!.netAmount; // String?
+      print("converted amount $amountStr--------------");
       final amount = double.tryParse(amountStr ?? "0") ?? 0;
       setState(() {
-        _amountController.text = amount.toStringAsFixed(0);
+        _amountController.text = amount.toString();
       });
     }
   }
@@ -253,7 +254,7 @@ class _SellGoldScreenState extends State<SellGoldScreen> {
       );
       return;
     }
-
+     print('sell screen amount --------$amount==========gold:$gold');
     // Proceed
     Navigator.push(
       context,

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:goldproject/compenent/loader.dart';
@@ -493,13 +494,18 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         return dob;
       }
 
+      String generateUsername(String name) {
+        final random = Random().nextInt(99999); // 0–99999
+        return "${name.toLowerCase()}$random";
+      }
+
       Map<String, String> body = {
         "firstname": _firstNameController.text.trim(),
         "lastname": _lastNameController.text.trim(),
         "email": _emailController.text.trim(),
         "phone": _phoneController.text.trim(),
         "phone_code": "91",
-        "username": "${_firstNameController.text}432",
+        "username": generateUsername(_firstNameController.text),
         "country_code": "IN",
         "country": "India",
         "father_mother_wife_name": "Abhishek",

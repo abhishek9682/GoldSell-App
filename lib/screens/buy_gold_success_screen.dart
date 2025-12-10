@@ -55,7 +55,7 @@ class _BuyGoldSuccessScreenState extends State<BuyGoldSuccessScreen> {
   Widget build(BuildContext context) {
     final data = widget.goldPurchaseData;
     String now = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    print('sucess buy response--------${data.amountPaid}');
+    print('success buy response--------${data.amountPaid}');
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       body: SafeArea(
@@ -165,7 +165,7 @@ class _BuyGoldSuccessScreenState extends State<BuyGoldSuccessScreen> {
                       _buildDetailRow(TokenStorage.translate("GST (%)"), '₹${data.gstAmount.toStringAsFixed(2)}'),
                       const SizedBox(height: 12),
 
-                      _buildDetailRow( TokenStorage.translate("TDS (%)"), '₹${data.tdsAmount.toStringAsFixed(2)}'),
+                      _buildDetailRow( TokenStorage.translate('TDS'), '₹${data.tdsAmount.toStringAsFixed(2)}'),
                       const SizedBox(height: 12),
 
                       _buildDetailRow( TokenStorage.translate('Total Tax'),

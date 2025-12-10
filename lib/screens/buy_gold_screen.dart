@@ -121,7 +121,7 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
 
     await provider.buyGoldConvert(body);
 
-    final response = provider.BuyGoldResponse;
+    final response = provider.goldCalculationResponse;
      print("------$response");
     if (response != null && response.data?.goldGrams != null) {
       setState(() {
@@ -136,13 +136,13 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
 
     final provider = Provider.of<BuyGoldConversion>(context, listen: false);
     Map<String, String> body = {
-      "type": "inr_to_grams",
+      // "type": "inr_to_grams",
       "amount": "$amount"
     };
 
     provider.buyGoldConvert(body);
 
-    final response = provider.BuyGoldResponse;
+    final response = provider.goldCalculationResponse;
   print("+++++++   $response");
     if (response == null ||
         response.data == null ||
@@ -166,7 +166,7 @@ class _BuyGoldScreenState extends State<BuyGoldScreen> {
 
     final amount = double.tryParse(_amountController.text) ?? 0;
 
-    if (amount <= 0) {
+    if (amount <= 15) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(TokenStorage.translate('Please enter a valid amount Min 15₹')),

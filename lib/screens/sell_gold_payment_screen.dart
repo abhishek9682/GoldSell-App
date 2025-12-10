@@ -98,7 +98,7 @@ class _SellGoldPaymentScreenState extends State<SellGoldPaymentScreen> {
     Map<String, dynamic> body = {
       "gold_grams": gold,
     };
-
+    print("sell payment confirm gold grams------------$gold");
     if (_selectedPaymentMethod == 0) {
       int bankId = widget.selectId;
 
@@ -117,6 +117,7 @@ class _SellGoldPaymentScreenState extends State<SellGoldPaymentScreen> {
         "upi_id": "${profileProvider.profileData?.data?.profile?.upiId}",
       });
     }
+
     final success = await goldProvider.sellGold(body);
     debugPrint("Sell Request Body => $body--${success}");
     setState(() {
@@ -158,7 +159,7 @@ class _SellGoldPaymentScreenState extends State<SellGoldPaymentScreen> {
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileDetailsProvider>(context);
     final goldProvider = Provider.of<GoldSellProvider>(context);
-
+   print("amount -----${widget.cashAmount}=======gold:${widget.goldAmount}");
     String bankAccountText = "HDFC Bank •••• 4532";
 
     if (profileProvider.primaryBank != null &&
@@ -471,47 +472,4 @@ class _SellGoldPaymentScreenState extends State<SellGoldPaymentScreen> {
     );
   }
 
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1))),
-      ),
-      child: SafeArea(
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(0, Icons.home, TokenStorage.translate("Home")),
-              _buildNavItem(1, Icons.account_balance_wallet, TokenStorage.translate("Wallet")),
-              _buildNavItem(2, Icons.history, TokenStorage.translate("Transaction History")),
-              _buildNavItem(3, Icons.person, TokenStorage.translate("Profile")),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, IconData icon, String label) {
-    final isSelected = _selectedNavIndex == index;
-    return InkWell(
-      onTap: () => _onNavNavTapped(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon,
-              color: isSelected ? const Color(0xFFFFD700) : Colors.white60, size: 24),
-          const SizedBox(height: 4),
-          Text(label,
-              style: isSelected
-                  ? AppTextStyles.navLabel11W600Gold
-                  : AppTextStyles.navLabel11White60),
-        ],
-      ),
-    );
-  }
-
-  void _onNavNavTapped(int index) => _onNavItemTapped(index);
 }

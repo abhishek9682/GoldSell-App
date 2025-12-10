@@ -551,8 +551,8 @@ class PlanDetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _infoRow("Bank ID:",
-                            selectedBankId?.toString() ?? "No bank"),
+                        // _infoRow("Bank ID:",
+                        //     selectedBankId?.toString() ?? "No bank"),
                         const SizedBox(height: 8),
                         _infoRow("Start Date:", _formattedNow()),
                         const SizedBox(height: 8),

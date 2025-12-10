@@ -19,8 +19,11 @@ class GoldPurchaseResponse {
 
 class GoldPurchaseData {
   final String trxId;
+  final String razorpayOrderId;     // ⭐ NEW
+  final String razorpayKeyId;       // ⭐ NEW
+
   final double goldGramsPurchased;
-  final String goldBalance;          // ✔ string
+  final String goldBalance;
   final double goldValue;
   final double gstAmount;
   final double tdsAmount;
@@ -31,6 +34,8 @@ class GoldPurchaseData {
 
   GoldPurchaseData({
     required this.trxId,
+    required this.razorpayOrderId,  // ⭐ NEW
+    required this.razorpayKeyId,    // ⭐ NEW
     required this.goldGramsPurchased,
     required this.goldBalance,
     required this.goldValue,
@@ -42,7 +47,6 @@ class GoldPurchaseData {
     required this.message,
   });
 
-  // 🔥 SUPER SAFE number cleaner
   static double cleanDouble(dynamic value) {
     if (value == null) return 0.0;
     return double.tryParse(value.toString().replaceAll(",", "")) ?? 0.0;
@@ -51,14 +55,17 @@ class GoldPurchaseData {
   factory GoldPurchaseData.fromJson(Map<String, dynamic> json) {
     return GoldPurchaseData(
       trxId: json['trx_id']?.toString() ?? '',
+      razorpayOrderId: json['razorpay_order_id']?.toString() ?? '',  // ⭐ NEW
+      razorpayKeyId: json['razorpay_key_id']?.toString() ?? '',      // ⭐ NEW
+
       goldGramsPurchased: cleanDouble(json['gold_grams']),
-      goldBalance: json['gold_balance']?.toString() ?? "0",   // ✔ now string
+      goldBalance: json['gold_balance']?.toString() ?? "0",
       goldValue: cleanDouble(json['gold_value']),
       gstAmount: cleanDouble(json['gst_amount']),
       tdsAmount: cleanDouble(json['tds_amount']),
       tcsAmount: cleanDouble(json['tcs_amount']),
       totalTaxAmount: cleanDouble(json['total_tax_amount']),
-      amountPaid: cleanDouble(json['total_amount']),          // ✔ FIXED
+      amountPaid: cleanDouble(json['amount']),
       message: json['message']?.toString() ?? '',
     );
   }

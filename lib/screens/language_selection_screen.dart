@@ -190,6 +190,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                                   Text(
                                     language.nativeName ?? '',
                                     style: AppTextStyles.bodyText.copyWith(
+                                      fontSize: 11,
                                       color: isSelected
                                           ? const Color(0xFFFFD700)
                                           : Colors.white,

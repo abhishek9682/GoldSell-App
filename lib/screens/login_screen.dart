@@ -113,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+
   void _navigateToCreateAccount() {
     Navigator.push(
       context,
@@ -138,6 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SizedBox(height: 40),
 
+                // Logo
                 Container(
                   width: 100,
                   height: 100,
@@ -154,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 const SizedBox(height: 30),
+
                 // Welcome Back Title
                 Text(
                  TokenStorage.translate("Welcome Back"),
@@ -183,6 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 const SizedBox(height: 12),
+
                 // Phone Input Field
                 Container(
                   decoration: BoxDecoration(
@@ -366,6 +370,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
         const SizedBox(height: 30),
+
                 // OR Divider
                 Row(
                   children: [

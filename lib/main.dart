@@ -21,6 +21,7 @@ import 'controllers/help_center_controllar.dart';
 import 'controllers/language_data_provider.dart';
 import 'controllers/language_provider.dart';
 import 'controllers/notifiacation_provier.dart';
+import 'controllers/otp_resend.dart';
 import 'controllers/otp_response.dart';
 import 'controllers/profile_details.dart';
 import 'controllers/sell_gold.dart';
@@ -71,6 +72,7 @@ void main() async{
       ChangeNotifierProvider(create: (_) => TermsConditionsProvider()),
       ChangeNotifierProvider(create: (_) => BannerProvider()),
       ChangeNotifierProvider(create: (_) => BuyGoldConversion()),
+      ChangeNotifierProvider(create: (_) => OtpResendProvider()),
    ],
      child: const MeeraGoldApp(),)
   );

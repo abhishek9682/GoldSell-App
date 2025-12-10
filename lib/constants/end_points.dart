@@ -28,3 +28,7 @@ const String notifiacation="/push-notification-show";
 const String vender="/merchants";
 const String termsCondition="/content/terms-conditions";
 const String banner="/content/mobile-banners";
+const String otpResends="/verify-otp";
+const String varifyRozaPay="/razorpay/verify";
+const String paymentSuccees="/test/razorpay/success";
+const String paymentFailed="/test/razorpay/failure";
