@@ -2,7 +2,11 @@ import 'dart:io';
 import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../compenent/loader.dart';
+=======
+import 'package:goldproject/compenent/loader.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
@@ -823,6 +827,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         Text(TokenStorage.translate("Personal Information"),
             style: AppTextStyles.subHeading1),
         const SizedBox(height: 16),
+<<<<<<< HEAD
         Row(
           children: [
             Expanded(
@@ -858,6 +863,21 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         //   icon: Icons.person_outline,
         //   errorText: _fieldErrors['lastName'],
         // ),
+=======
+        _buildTextField(
+          label: TokenStorage.translate("Firstname").toUpperCase(),
+          controller: _firstNameController,
+          icon: Icons.person_outline,
+          errorText: _fieldErrors['firstName'],
+        ),
+        const SizedBox(height: 16),
+        _buildTextField(
+          label: TokenStorage.translate("Lastname").toUpperCase(),
+          controller: _lastNameController,
+          icon: Icons.person_outline,
+          errorText: _fieldErrors['lastName'],
+        ),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         const SizedBox(height: 16),
         _buildTextField(
           label: TokenStorage.translate("Email Address"),
@@ -951,6 +971,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           ],
         ),
         const SizedBox(height: 16),
+<<<<<<< HEAD
         Text("Idenetity Number",style: AppTextStyles.subHeading1,),
         const SizedBox(height: 16),
 
@@ -971,6 +992,33 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           keyboardType: TextInputType.number,
           maxLength: 12,
           errorText: _fieldErrors['aadhar'],
+=======
+        Row(
+          children: [
+            Expanded(
+              child: _buildTextField(
+                label: TokenStorage.translate("Pan number"),
+                controller: _panController,
+                icon: Icons.credit_card,
+                hint: 'ABCDE1234F',
+                maxLength: 10,
+                errorText: _fieldErrors['pan'],
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _buildTextField(
+                label: TokenStorage.translate("AADHAAR NUMBER"),
+                controller: _aadharController,
+                icon: Icons.badge,
+                hint: '1234 5678 9012',
+                keyboardType: TextInputType.number,
+                maxLength: 12,
+                errorText: _fieldErrors['aadhar'],
+              ),
+            ),
+          ],
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         ),
       ],
     );
@@ -997,6 +1045,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               ? group.documents!.first.fileUrl
               : null;
           kycStatus = group.status ?? "Pending";
+<<<<<<< HEAD
           return InkWell(
             onTap: (){
               print("kycstatus===========${group.status}");
@@ -1017,6 +1066,18 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                 const SizedBox(height: 10),
               ],
             ),
+=======
+          return Column(
+            children: [
+              _displayDocumentUploadCard(
+                title: name,
+                subtitle: "Upload $name",
+                imageUrl: fileUrl,
+                status: kycStatus,
+              ),
+              const SizedBox(height: 10),
+            ],
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           );
         }).toList(),
       ],

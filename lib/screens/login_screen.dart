@@ -1,7 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:permission_handler/permission_handler.dart';
 import '../screens/Privacy_Policy_screen.dart';
+=======
+import 'package:goldproject/screens/Privacy_Policy_screen.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/custom_style.dart';
@@ -33,7 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
   initState()  {
     super.initState();
     _phoneController.addListener(_validateForm);
+<<<<<<< HEAD
     // _requestPermissions();
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     clearTrasaction();
      // translated =  await TokenStorage.translate("Phone Number");
     // WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -43,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //   txnProvider.transactions.clear();   // <-- Clear old transaction list
     // });
   }
+<<<<<<< HEAD
 
   Future<void> _requestPermissions() async {
     var status = await Permission.sms.status;
@@ -50,6 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
       await Permission.sms.request();
     }
   }
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
   clearTrasaction(){
     final txnProvider =
     Provider.of<TransactionProvider>(context, listen: false);
@@ -79,7 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
       if(data.userExists==true) {
         print("varification =>>>>  ${ provider.otpResponse!.data!}");
         if (data.otpSent == true) {
+<<<<<<< HEAD
           bool? userAlreadyExists=provider.otpResponse?.data?.userExists;
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -91,7 +104,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           );
         } else {
+<<<<<<< HEAD
 
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           Navigator.push(
             context,
             MaterialPageRoute(

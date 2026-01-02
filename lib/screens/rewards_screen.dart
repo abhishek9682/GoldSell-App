@@ -253,7 +253,11 @@
 // }
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../screens/reward_history.dart';
+=======
+import 'package:goldproject/screens/reward_history.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
@@ -329,7 +333,11 @@ class _RewardsScreenState extends State<RewardsScreen> {
                   _buildTotalRewardsCard(rewards),
 
                   const SizedBox(height: 32),
+<<<<<<< HEAD
                   Text(TokenStorage.translate("Bonuses"), style: AppTextStyles.sectionTitle18W600White),
+=======
+                  Text('Bonuses', style: AppTextStyles.sectionTitle18W600White),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                   const SizedBox(height: 16),
 
                   // Dynamic reward listing, each becomes a tile
@@ -339,15 +347,25 @@ class _RewardsScreenState extends State<RewardsScreen> {
                     ...rewards.map((txn) => _dynamicRewardItem(txn)).toList(),
 
                   const SizedBox(height: 32),
+<<<<<<< HEAD
                   Text(TokenStorage.translate('Commissions'), style: AppTextStyles.sectionTitle18W600White),
+=======
+                  Text('Commissions', style: AppTextStyles.sectionTitle18W600White),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                   const SizedBox(height: 16),
 
                   // STATIC UI BELOW (unchanged)
                   _buildRewardItem(
                     icon: '🤝',
+<<<<<<< HEAD
                     title: TokenStorage.translate("Referral Commission"),
                     description: TokenStorage.translate("Earn when your friends invest"),
                     status: TokenStorage.translate("View Details"),
+=======
+                    title: 'Referral Commission',
+                    description: 'Earn when your friends invest',
+                    status: 'View Details',
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                     statusColor: const Color(0xFFFFD700),
                   ),
 
@@ -369,7 +387,11 @@ class _RewardsScreenState extends State<RewardsScreen> {
                         ),
                       ),
                       child: Text(
+<<<<<<< HEAD
                         TokenStorage.translate("View Reward History"),
+=======
+                        'View Reward History',
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                         style: AppTextStyles.copyButton16W600Gold,
                       ),
                     ),
@@ -421,7 +443,11 @@ class _RewardsScreenState extends State<RewardsScreen> {
         children: [
           const Text('🎉', style: TextStyle(fontSize: 48)),
           const SizedBox(height: 12),
+<<<<<<< HEAD
             Text(TokenStorage.translate(TokenStorage.translate("Total Rewards Earned")), style: AppTextStyles.body14W500White70.copyWith(color: Colors.black87)),
+=======
+          Text('Total Rewards Earned', style: AppTextStyles.body14W500White70.copyWith(color: Colors.black87)),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           const SizedBox(height: 8),
 
           // DYNAMIC AMOUNT
@@ -433,7 +459,11 @@ class _RewardsScreenState extends State<RewardsScreen> {
           ),
 
           const SizedBox(height: 8),
+<<<<<<< HEAD
           Text(TokenStorage.translate("Keep investing to earn more!"),
+=======
+          Text('Keep investing to earn more!',
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               style: AppTextStyles.body14W500White70.copyWith(color: Colors.black54, fontSize: 12)),
         ],
       ),
@@ -512,7 +542,11 @@ class _RewardsScreenState extends State<RewardsScreen> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 80),
+<<<<<<< HEAD
         child: Text(TokenStorage.translate("No rewards earned yet."), style: AppTextStyles.body14White70),
+=======
+        child: Text("No rewards earned yet.", style: AppTextStyles.body14White70),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       ),
     );
   }

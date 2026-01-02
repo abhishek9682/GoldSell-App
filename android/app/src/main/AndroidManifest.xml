@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     applicationId = "com.meeragold.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,6 +10,12 @@
 <!--    <uses-permission android:name="android.permission.RECEIVE_SMS" />-->
 <!--    <uses-permission android:name="android.permission.SEND_SMS" />-->
 
+=======
+    applicationId = "com.gold.goldproject">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
 
     <application
@@ -29,12 +36,15 @@
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
+<<<<<<< HEAD
                 android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVER_API"
                 android:value="true"/>
             <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="high_importance_channel"/>
             <meta-data
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
@@ -60,4 +70,8 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+<<<<<<< HEAD
 </manifest>
+=======
+</manifest>
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6

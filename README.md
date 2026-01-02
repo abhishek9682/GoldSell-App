@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # meeragold
+=======
+# goldproject
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
 A new Flutter project.
 

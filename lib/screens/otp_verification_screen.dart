@@ -1,9 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../compenent/loader.dart';
 import '../screens/dashboard_screen.dart';
+=======
+import 'package:goldproject/compenent/loader.dart';
+import 'package:goldproject/screens/dashboard_screen.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/custom_style.dart';
@@ -15,7 +20,12 @@ import 'complete_profile_screen.dart';
 class OTPVerificationScreen extends StatefulWidget {
   final String phoneNumber;
   final bool isNewUser;
+<<<<<<< HEAD
    OTPVerificationScreen({
+=======
+
+  const OTPVerificationScreen({
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     super.key,
     required this.phoneNumber,
     required this.isNewUser,
@@ -28,6 +38,7 @@ class OTPVerificationScreen extends StatefulWidget {
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   final List<TextEditingController> _otpControllers =
   List.generate(4, (index) => TextEditingController());
+<<<<<<< HEAD
 
   final List<FocusNode> _focusNodes =
   List.generate(4, (index) => FocusNode());
@@ -128,6 +139,27 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     _secondsRemaining = 30;
     _canResend = false;
 
+=======
+  late final double width = MediaQuery.of(context).size.width;
+  final List<FocusNode> _focusNodes =
+  List.generate(4, (index) => FocusNode());
+
+  bool isButtonEnabled = false;
+  int _secondsRemaining = 30;
+  bool _canResend = false;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  // TIMER LOGIC
+  void startTimer() {
+    _secondsRemaining = 30;
+    _canResend = false;
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     _timer?.cancel();
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -142,6 +174,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   void dispose() {
+<<<<<<< HEAD
     _otpListenerTimer?.cancel();
     _timer?.cancel();
     for (var c in _otpControllers) c.dispose();
@@ -158,6 +191,30 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   Future<void> verifyOTP() async {
     final otpProvider =
     Provider.of<OtpVarification>(context, listen: false);
+=======
+    for (var c in _otpControllers) {
+      c.dispose();
+    }
+    for (var f in _focusNodes) {
+      f.dispose();
+    }
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  // GET COMPLETE OTP
+  String _getOTP() {
+    return _otpControllers.map((c) => c.text).join();
+  }
+
+  bool _isOTPComplete() {
+    return _otpControllers.every((c) => c.text.isNotEmpty);
+  }
+
+  // API CALL
+  Future<void> verifyOTP() async {
+    final otpProvider = Provider.of<OtpVarification>(context, listen: false);
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
     bool success = await otpProvider.verifyOtp(
       widget.phoneNumber,
@@ -165,16 +222,23 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     );
 
     if (!mounted) return;
+<<<<<<< HEAD
 
+=======
+   print("otp activation is --->>>>> $success");
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     if (success) {
       if (otpProvider.verifyOtpResponse!.data!.profileCompleted!) {
         await TokenStorage.saveToken(
             otpProvider.verifyOtpResponse?.data?.token ?? "");
+<<<<<<< HEAD
         await TokenStorage.addFcmToken();
 
         String? fcmToken = await TokenStorage.getFcmToken();
         otpProvider.addFcmToken(fcmToken!);
 
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => const DashboardScreen()),
@@ -183,11 +247,15 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       } else {
         Navigator.pushAndRemoveUntil(
           context,
+<<<<<<< HEAD
           MaterialPageRoute(
             builder: (_) => CompleteProfileScreen(
               token: otpProvider.verifyOtpResponse?.data?.token ?? "",
             ),
           ),
+=======
+          MaterialPageRoute(builder: (_) => CompleteProfileScreen(token:otpProvider.verifyOtpResponse?.data?.token ?? "",)),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               (route) => false,
         );
       }
@@ -195,8 +263,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
+<<<<<<< HEAD
             otpProvider.apiStatus ??
                 TokenStorage.translate("Verify Your OTP to Disable"),
+=======
+            otpProvider.apiStatus ?? TokenStorage.translate("Verify Your OTP to Disable"),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             style: AppTextStyles.bodyText,
           ),
           backgroundColor: Colors.red,
@@ -205,6 +277,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     }
   }
 
+<<<<<<< HEAD
   // RESEND OTP
   void _resendOTP() async {
     if (!_canResend) return;
@@ -214,6 +287,19 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
     bool success =
     await provider.otpResend({"phone": widget.phoneNumber, "otp": ""});
+=======
+  void _resendOTP() async {
+    if (!_canResend) return;
+
+    final provider = Provider.of<OtpResendProvider>(context, listen: false);
+
+    Map<String, dynamic> body = {
+      "phone": widget.phoneNumber,
+      "otp": ""
+    };
+
+    bool success = await provider.otpResend(body);
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
     if (!mounted) return;
 
@@ -231,9 +317,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
       _focusNodes[0].requestFocus();
 
+<<<<<<< HEAD
       // Read fresh OTP
       Future.delayed(const Duration(seconds: 2) ,/*_readLatestOtp*/); // _readLatestOtp
 
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("OTP resent successfully"),
@@ -253,7 +342,11 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     }
   }
 
+<<<<<<< HEAD
   // UI
+=======
+
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
   @override
   Widget build(BuildContext context) {
     final otpProvider = Provider.of<OtpVarification>(context);
@@ -262,11 +355,20 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
+<<<<<<< HEAD
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // LOCK ICON
+=======
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              // Lock Icon
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               Container(
                 width: 100,
                 height: 100,
@@ -274,12 +376,23 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   color: const Color(0xFFFFD700),
                   borderRadius: BorderRadius.circular(20),
                 ),
+<<<<<<< HEAD
                 child: const Icon(Icons.lock_outline,
                     size: 50, color: Color(0xFF0A0A0A)),
+=======
+                child: const Center(
+                  child: Icon(
+                    Icons.lock_outline,
+                    size: 50,
+                    color: Color(0xFF0A0A0A),
+                  ),
+                ),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               ),
 
               const SizedBox(height: 30),
 
+<<<<<<< HEAD
               Text(TokenStorage.translate("Verify Your OTP"),
                   style: AppTextStyles.loginHeading),
 
@@ -296,6 +409,27 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     const TextSpan(text: "Code sent to\n"),
                     TextSpan(
                       text: "+91 ${widget.phoneNumber}",
+=======
+              Text(TokenStorage.translate(TokenStorage.translate("Verify Your OTP")),
+                  style: AppTextStyles.loginHeading),
+              // const SizedBox(height: 10),
+              // Subtitle
+              Text(
+                'Enter code sent to mobile',
+                style: AppTextStyles.loginSubHeading,
+              ),
+              const SizedBox(height: 30),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    color: Colors.white60,
+                  ),
+                  children: [
+                    const TextSpan(text: 'Code sent to\n'),
+                    TextSpan(
+                      text: '+91 ${widget.phoneNumber}',
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                       style: GoogleFonts.poppins(
                         fontSize: 18,
                         color: const Color(0xFFFFD700),
@@ -304,6 +438,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     ),
                   ],
                 ),
+<<<<<<< HEAD
               ),
 
               const SizedBox(height: 30),
@@ -311,10 +446,24 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(4, (i) => _otpBox(i)),
+=======
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+
+              // 🔥 4 OTP BOXES
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(
+                  4,
+                      (i) => _buildOTPBox(i),
+                ),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               ),
 
               const SizedBox(height: 20),
 
+<<<<<<< HEAD
               _canResend
                   ? TextButton(
                 onPressed: _resendOTP,
@@ -326,6 +475,23 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
               const SizedBox(height: 20),
 
+=======
+              // TIMER & RESEND
+              _canResend
+                  ? TextButton(
+                onPressed: _resendOTP,
+                child: Text("Resend OTP", style: AppTextStyles.bodyText),
+              )
+                  : Flexible(
+                    child: Text("Resend OTP in 00:$_secondsRemaining sec",
+                                  style: AppTextStyles.bodyText,
+                                ),
+                  ),
+
+              const SizedBox(height: 20),
+
+              // VERIFY BUTTON
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               SizedBox(
                 width: double.infinity,
                 height: 50,
@@ -341,10 +507,14 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   ),
                   child: otpProvider.isLoading
                       ? CustomLoader()
+<<<<<<< HEAD
                       : Text(
                     TokenStorage.translate("Verify Your OTP"),
                     style: AppTextStyles.buttonText,
                   ),
+=======
+                      : Text(TokenStorage.translate("Verify Your OTP"), style: AppTextStyles.buttonText),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                 ),
               ),
             ],
@@ -354,7 +524,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     );
   }
 
+<<<<<<< HEAD
   Widget _otpBox(int index) {
+=======
+  // OTP BOX UI (EXACTLY LIKE YOUR SCREENSHOT)
+  Widget _buildOTPBox(int index) {
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     return Container(
       width: 65,
       height: 65,
@@ -363,7 +538,11 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: _otpControllers[index].text.isNotEmpty
+<<<<<<< HEAD
               ? const Color(0xFFFFD700)
+=======
+              ?const Color(0xFFFFD700)
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               : Colors.white12,
           width: 2,
         ),
@@ -383,11 +562,20 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
           counterText: "",
           border: InputBorder.none,
         ),
+<<<<<<< HEAD
         onChanged: (v) {
           setState(() {});
           if (v.isNotEmpty && index < 3) {
             _focusNodes[index + 1].requestFocus();
           } else if (v.isEmpty && index > 0) {
+=======
+        onChanged: (value) {
+          setState(() {});
+
+          if (value.isNotEmpty && index < 3) {
+            _focusNodes[index + 1].requestFocus();
+          } else if (value.isEmpty && index > 0) {
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             _focusNodes[index - 1].requestFocus();
           }
         },

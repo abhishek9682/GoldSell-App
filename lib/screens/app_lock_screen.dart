@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../screens/splash_screen.dart';
+=======
+import 'package:goldproject/screens/splash_screen.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import '../helpers/biometric_helper.dart';
 import '../helpers/security_storage.dart';
 import 'dashboard_screen.dart';

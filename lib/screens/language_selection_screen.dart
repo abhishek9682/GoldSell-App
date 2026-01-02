@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+<<<<<<< HEAD
 import '../compenent/snackbar.dart';
+=======
+import 'package:goldproject/compenent/snackbar.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/custom_style.dart';
@@ -270,7 +274,11 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       borderRadius: BorderRadius.circular(26),
                     ),
                   ),
+<<<<<<< HEAD
                   child: Text(TokenStorage.translate("Continue"), style: AppTextStyles.buttonText),
+=======
+                  child: Text('CONTINUE', style: AppTextStyles.buttonText),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                 ),
               ),
             ),

@@ -69,6 +69,7 @@ class BuyGold with ChangeNotifier {
   }
 
   // Step 3: Notify Backend Payment Success
+<<<<<<< HEAD
   Future<GoldPurchaseData?> paymentSuccess(String trxId) async {
     _loading = true;
     notifyListeners();
@@ -101,4 +102,38 @@ class BuyGold with ChangeNotifier {
 
     return response != null && response["status"] == "success";
   }
+=======
+  // Future<GoldPurchaseData?> paymentSuccess(String trxId) async {
+  //   _loading = true;
+  //   notifyListeners();
+  //
+  //   final response = await apiClient.PostMethod(paymentSuccees, {"trx_id": trxId});
+  //   print("succeess response=======  ${response}");
+  //   _loading = false;
+  //   notifyListeners();
+  //
+  //   if (response != null && response["status"] == "success") {
+  //     return GoldPurchaseData.fromJson(response["data"]);
+  //   } else {
+  //     mess = response["data"] ?? "Payment success failed";
+  //     return null;
+  //   }
+  // }
+  //
+  // // Step 4: Notify Backend Payment Failure
+  // Future<bool> paymentFailure(String trxId, String reason) async {
+  //   _loading = true;
+  //   notifyListeners();
+  //
+  //   final response = await apiClient.PostMethod(paymentFailed, {
+  //     "trx_id": trxId,
+  //     "reason": reason,
+  //   });
+  //
+  //   _loading = false;
+  //   notifyListeners();
+  //
+  //   return response != null && response["status"] == "success";
+  // }
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 }

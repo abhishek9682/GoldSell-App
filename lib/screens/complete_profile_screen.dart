@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:meeragold/controllers/otp_response.dart';
 import 'package:meeragold/controllers/varify_otp.dart';
 import '../compenent/custom_style.dart';
 import '../compenent/loader.dart';
+=======
+import 'package:goldproject/compenent/custom_style.dart';
+import 'package:goldproject/compenent/loader.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../controllers/user_registration.dart';
@@ -93,11 +98,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     if (!mounted) return;
 
     if (success) {
+<<<<<<< HEAD
       final otpProvider=Provider.of<OtpVarification>(context,listen: false);
       await TokenStorage.saveToken(widget.token);
       await TokenStorage.addFcmToken();
       String? fcmToken=await TokenStorage.getFcmToken();
       otpProvider.addFcmToken(fcmToken!);
+=======
+      await TokenStorage.saveToken(widget.token);
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const DashboardScreen()),
@@ -148,6 +157,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               ),
               const SizedBox(height: 40),
 
+<<<<<<< HEAD
              Row(
                children: [
                  Expanded(
@@ -161,6 +171,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                  ),
                ],
              ),
+=======
+              _buildInputField(
+                  TokenStorage.translate("Firstname"), _firstNameController, Icons.person_outline),
+              const SizedBox(height: 20),
+              _buildInputField(
+                  TokenStorage.translate("Lastname"), _lastNameController, Icons.person_outline),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               const SizedBox(height: 20),
               _buildInputField(
                   TokenStorage.translate("Email Address"), _emailController, Icons.email_outlined,

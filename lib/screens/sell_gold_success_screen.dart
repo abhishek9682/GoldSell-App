@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../models/convert_gold_or_money.dart';
+=======
+import 'package:goldproject/models/convert_gold_or_money.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../compenent/bottum_bar.dart';

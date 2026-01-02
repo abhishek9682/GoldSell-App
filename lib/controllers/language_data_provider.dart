@@ -1,8 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 
 import '../api_client/apiClient.dart';
 import '../constants/end_points.dart';
+=======
+import 'package:goldproject/api_client/apiClient.dart';
+import 'package:goldproject/constants/end_points.dart';
+
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import '../utils/token_storage.dart';
 
 class LanguageDataProvider with ChangeNotifier {

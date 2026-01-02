@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import '../utils/token_storage.dart';
+=======
+import 'package:goldproject/utils/token_storage.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import '../compenent/Custom_appbar.dart';
 import '../controllers/Term_condition.dart';
 import 'login_screen.dart';

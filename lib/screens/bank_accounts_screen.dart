@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../compenent/loader.dart';
 import '../screens/personal_details_screen.dart';
 import '../utils/token_storage.dart';
+=======
+import 'package:goldproject/compenent/loader.dart';
+import 'package:goldproject/screens/personal_details_screen.dart';
+import 'package:goldproject/utils/token_storage.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
@@ -145,7 +151,11 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
 
 
     return Container(
+<<<<<<< HEAD
       padding: const EdgeInsets.all(10),
+=======
+      padding: const EdgeInsets.all(20),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
@@ -188,6 +198,7 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
                   size: 24,
                 ),
               ),
+<<<<<<< HEAD
               SizedBox(width: 60,),
 
               isPrimary? Container(
@@ -242,11 +253,62 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
           SizedBox(height: 5,),
           Text(TokenStorage.translate("Account Number"), style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
           Text(bank.accountNumber ?? "-", style: AppTextStyles.body12White70),
+=======
+              SizedBox(width: 10,),
+
+              Expanded(
+                child: Text(
+                  bank.bankName ?? "-",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: isPrimary ? null : () => _setPrimary(provider, bank.id!),
+                  child: Text(
+                    TokenStorage.translate(TokenStorage.translate("Set Primary")),
+                    style: TextStyle(
+                      color: isPrimary ? Colors.white38 : Colors.amber,
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+
+          const SizedBox(height: 8),
+
+          if (isPrimary)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.amber.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+               TokenStorage.translate("PRIMARY ACCOUNT"),
+                style: TextStyle(color: Colors.amber, fontSize: 12, fontWeight: FontWeight.w600),
+              ),
+            ),
+          const SizedBox(height: 12),
+
+          Text(TokenStorage.translate("Account Number"), style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
+          Text(bank.accountNumber ?? "-", style: GoogleFonts.poppins(color: Colors.white70)),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
           const SizedBox(height: 8),
 
           Text(TokenStorage.translate("IFSC Code"), style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
+<<<<<<< HEAD
           Text(bank.ifscCode ?? "-", style: AppTextStyles.body12White60),
+=======
+          Text(bank.ifscCode ?? "-", style: GoogleFonts.poppins(color: Colors.white70)),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
           const SizedBox(height: 8),
           //
@@ -255,6 +317,7 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
 
           const SizedBox(height: 20),
           if (!isPrimary)
+<<<<<<< HEAD
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -315,6 +378,53 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
               ],
             )
 
+=======
+    Row(
+    children: [
+    // EDIT button (only when NOT verified)
+    if (isVarified == false)
+    Expanded(
+    child: OutlinedButton.icon(
+    onPressed: () async {
+    await provider.fetchProfile();
+    final updatedBank = provider.bankAccounts[index];
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (_) => AddBankAccountScreen(bank: updatedBank),
+    ),
+    );
+    },
+    style: OutlinedButton.styleFrom(
+    side: BorderSide(color: Colors.white30),
+    ),
+    icon: Icon(Icons.edit, size: 16, color: Colors.white),
+    label: Text(
+    TokenStorage.translate("Edit"),
+    style: const TextStyle(color: Colors.white),
+    ),
+    ),
+    ),
+
+    if (isVarified == false) const SizedBox(width: 10),
+
+    // REMOVE button
+    Expanded(
+    child: OutlinedButton.icon(
+    onPressed: () => _removeAccount(provider, bank.id!, isPrimary),
+    style: OutlinedButton.styleFrom(
+    side: const BorderSide(color: Colors.red),
+    ),
+    icon: const Icon(Icons.delete, size: 16, color: Colors.red),
+    label: Text(
+    TokenStorage.translate("Remove"),
+    style: const TextStyle(color: Colors.red),
+    ),
+    ),
+    ),
+    ],
+    ),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         ],
       ),
     );
@@ -331,7 +441,11 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       appBar: CustomAppBar(
+<<<<<<< HEAD
         title: TokenStorage.translate("Select bank account"),
+=======
+        title: TokenStorage.translate("Select Bank Currency"),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         onBack: () {
           Navigator.pop(context);
         },
@@ -343,7 +457,11 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
           padding: const EdgeInsets.all(20),
           children: [
             if (banks.isEmpty)
+<<<<<<< HEAD
               Text(TokenStorage.translate("No bank accounts yet"), style: AppTextStyles.loginSubHeading)
+=======
+              Text(TokenStorage.translate("No bank accounts yet"), style: GoogleFonts.poppins(color: Colors.white60))
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             else
               ...List.generate(banks.length,
                       (i) => Padding(
@@ -376,7 +494,11 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
                   elevation: 8,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 ),
+<<<<<<< HEAD
                 child: Text(TokenStorage.translate("Add Bank Account"), style: AppTextStyles.buttonText.copyWith(fontSize: 16)),
+=======
+                child: Text(TokenStorage.translate("Add Bank Account"), style: AppTextStyles.buttonText),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               ),
             ),
             SizedBox( height:10),

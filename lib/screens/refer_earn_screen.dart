@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
 import '../utils/token_storage.dart';
+=======
+import 'package:goldproject/utils/token_storage.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
@@ -142,7 +146,11 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
 
   Widget _buildRewardBanner() {
     return Container(
+<<<<<<< HEAD
       padding: const EdgeInsets.all(15),
+=======
+      padding: const EdgeInsets.all(24),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFFFFD700), Color(0xFFDAA520)],
@@ -166,9 +174,15 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             ),
             child: const Icon(Icons.card_giftcard, size: 50, color: Colors.white),
           ),
+<<<<<<< HEAD
           const SizedBox(height: 10),
           Text(
             TokenStorage.translate("₹20"),
+=======
+          const SizedBox(height: 16),
+          Text(
+            TokenStorage.translate("₹100"),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             style: AppTextStyles.reward48BoldWhite,
           ),
           const SizedBox(height: 8),
@@ -199,7 +213,10 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
           Text(TokenStorage.translate("Your Referral Code"), style: AppTextStyles.body14W500White70),
           const SizedBox(height: 16),
           Container(
+<<<<<<< HEAD
             alignment: Alignment.center,
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
               color: const Color(0xFF0A0A0A),
@@ -209,7 +226,11 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+<<<<<<< HEAD
                 Expanded(child: Center(child: Text("${provider.profileData?.data?.profile?.referralCode}", style: AppTextStyles.referralCode24W600Gold))),
+=======
+                Expanded(child: Text("${provider.profileData?.data?.profile?.referralCode}", style: AppTextStyles.referralCode24W600Gold)),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
               ],
             ),
           ),
@@ -239,7 +260,11 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
       child: ElevatedButton.icon(
         onPressed: _shareReferralCode,
         icon: const Icon(Icons.share, size: 20),
+<<<<<<< HEAD
         label: Text(TokenStorage.translate("Share & Invite Friends"), style: AppTextStyles.shareButton18W600Black.copyWith(fontSize: 14)),
+=======
+        label: Text(TokenStorage.translate("Share & Invite Friends"), style: AppTextStyles.shareButton18W600Black),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         style: ElevatedButton.styleFrom(
           backgroundColor: AppTextStyles.copyButton16W600Gold.color,
           foregroundColor: AppTextStyles.buttonText.color,
@@ -285,16 +310,26 @@ class _ReferEarnScreenState extends State<ReferEarnScreen> {
             shape: BoxShape.circle,
             border: Border.all(color: AppTextStyles.stepNumber18BoldGold.color!, width: 2),
           ),
+<<<<<<< HEAD
           child: Center(child: Text(number, style: AppTextStyles.stepNumber18BoldGold.copyWith(fontSize: 14))),
+=======
+          child: Center(child: Text(number, style: AppTextStyles.stepNumber18BoldGold)),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         ),
         const SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+<<<<<<< HEAD
               Text(title, style: AppTextStyles.stepTitle16W600White.copyWith(fontSize: 14)),
                SizedBox(height: 4),
               Text(description, style: AppTextStyles.stepDescription14White70.copyWith(fontSize: 11)),
+=======
+              Text(title, style: AppTextStyles.stepTitle16W600White),
+              const SizedBox(height: 4),
+              Text(description, style: AppTextStyles.stepDescription14White70),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             ],
           ),
         ),

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../utils/token_storage.dart';
+=======
+import 'package:goldproject/utils/token_storage.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../controllers/notifiacation_provier.dart';
@@ -101,7 +105,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
           const SizedBox(height: 24),
           Text(
+<<<<<<< HEAD
             TokenStorage.translate("No notifications yet"),
+=======
+            'No notifications yet',
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.w600,

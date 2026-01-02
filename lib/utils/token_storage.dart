@@ -1,5 +1,8 @@
 import 'dart:convert';
+<<<<<<< HEAD
 import 'package:firebase_messaging/firebase_messaging.dart';
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:shared_preferences/shared_preferences.dart';
 Map<String, dynamic> _langData = <String,dynamic>{};
 class TokenStorage {
@@ -11,6 +14,7 @@ class TokenStorage {
     return await prefs.setString(_keyToken, token);
   }
 
+<<<<<<< HEAD
   static Future<void> addFcmToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
     if(token!=null)
@@ -31,6 +35,8 @@ class TokenStorage {
   }
 
 
+=======
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
   /// Get Token
   static Future<String?> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

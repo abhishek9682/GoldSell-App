@@ -1,14 +1,25 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:goldproject/compenent/loader.dart';
+import 'package:goldproject/controllers/profile_details.dart';
+import 'package:goldproject/utils/token_storage.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
 import '../compenent/custom_style.dart';
+<<<<<<< HEAD
 import '../compenent/loader.dart';
 import '../controllers/add_bank_account.dart';
 import '../controllers/profile_details.dart';
 import '../models/get_profile_details.dart';
 import '../utils/token_storage.dart';
+=======
+import '../controllers/add_bank_account.dart';
+import '../models/get_profile_details.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'dashboard_screen.dart';
 import 'wallet_screen.dart';
 import 'history_screen.dart';
@@ -276,6 +287,47 @@ class _AddBankAccountScreenState extends State<AddBankAccountScreen> {
     );
   }
 
+<<<<<<< HEAD
+=======
+  Widget _buildBottomNav() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1A),
+        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1))),
+      ),
+      child: SafeArea(
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(0, Icons.home, TokenStorage.translate("Home")),
+              _buildNavItem(1, Icons.account_balance_wallet, TokenStorage.translate("Wallet")),
+              _buildNavItem(2, Icons.history, TokenStorage.translate("History")),
+              _buildNavItem(3, Icons.person, TokenStorage.translate("Profile")),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, IconData icon, String label) {
+    final selected = _selectedNavIndex == index;
+
+    return InkWell(
+      onTap: () => _onNavItemTapped(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: selected ? const Color(0xFFFFD700) : Colors.white60),
+          Text(label,
+              style: selected ? AppTextStyles.navLabel11W600Gold : AppTextStyles.navLabel11White60),
+        ],
+      ),
+    );
+  }
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
   void _onNavItemTapped(int index) {
     switch (index) {

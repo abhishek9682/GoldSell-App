@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:meeragold/constants/end_points.dart';
 import '../utils/token_storage.dart';
+=======
+import 'package:goldproject/utils/token_storage.dart';
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
@@ -32,7 +36,11 @@ class _NearbyVendorsScreenState extends State<NearbyVendorsScreen> {
   Future<void> _callPhone(String phone) async {
     if (phone.isEmpty || phone == "N/A") {
       ScaffoldMessenger.of(context).showSnackBar(
+<<<<<<< HEAD
          SnackBar(content: Text(TokenStorage.translate("Phone number not available"))),
+=======
+        const SnackBar(content: Text("Phone number not available")),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       );
       return;
     }
@@ -50,7 +58,11 @@ class _NearbyVendorsScreenState extends State<NearbyVendorsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
+<<<<<<< HEAD
          SnackBar(content: Text(TokenStorage.translate( "Could not open dialer"))),
+=======
+        const SnackBar(content: Text("Could not open dialer")),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       );
     }
   }
@@ -77,7 +89,11 @@ class _NearbyVendorsScreenState extends State<NearbyVendorsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
+<<<<<<< HEAD
          SnackBar(content: Text(TokenStorage.translate("Could not open Google Maps"))),
+=======
+        const SnackBar(content: Text("Could not open Google Maps")),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       );
     }
   }
@@ -110,7 +126,11 @@ class _NearbyVendorsScreenState extends State<NearbyVendorsScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
+<<<<<<< HEAD
          SnackBar(content: Text(TokenStorage.translate("Could not open email app"))),
+=======
+        const SnackBar(content: Text("Could not open email app")),
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       );
     }
   }
@@ -314,7 +334,11 @@ class _NearbyVendorsScreenState extends State<NearbyVendorsScreen> {
       child: Padding(
         padding: const EdgeInsets.only(top: 60),
         child: Text(
+<<<<<<< HEAD
           TokenStorage.translate("No vendors found nearby."),
+=======
+          "No vendors found nearby.",
+>>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           style:
           AppTextStyles.subHeading.copyWith(color: Colors.white70),
         ),
