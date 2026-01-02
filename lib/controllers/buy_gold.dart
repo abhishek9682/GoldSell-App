@@ -69,7 +69,7 @@ class BuyGold with ChangeNotifier {
   }
 
   // Step 3: Notify Backend Payment Success
-<<<<<<< HEAD
+
   Future<GoldPurchaseData?> paymentSuccess(String trxId) async {
     _loading = true;
     notifyListeners();
@@ -102,7 +102,7 @@ class BuyGold with ChangeNotifier {
 
     return response != null && response["status"] == "success";
   }
-=======
+
   // Future<GoldPurchaseData?> paymentSuccess(String trxId) async {
   //   _loading = true;
   //   notifyListeners();
@@ -135,5 +135,4 @@ class BuyGold with ChangeNotifier {
   //
   //   return response != null && response["status"] == "success";
   // }
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 }

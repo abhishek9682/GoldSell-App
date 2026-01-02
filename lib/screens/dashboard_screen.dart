@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../app_colors.dart';
 import '../compenent/loader.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/bottum_bar.dart';
 import '../controllers/InvestmentPlansProvider.dart';
 import '../controllers/banner_provider.dart';
-<<<<<<< HEAD
 import '../controllers/loan_provider.dart';
-=======
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import '../controllers/profile_details.dart';
 import '../models/investment_plans.dart';
 import '../utils/token_storage.dart';
@@ -51,10 +45,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<Map<String, String>> _investmentAmounts = [];
 
   Future<void> loadData() async {
-<<<<<<< HEAD
     final loanProvider=Provider.of<GoldLoanProvider>(context,listen: false);
-=======
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+
     final profileProvider = Provider.of<ProfileDetailsProvider>(context, listen: false);
     final plansProvider = Provider.of<InvestmentPlansProvider>(context, listen: false);
     Provider.of<BannerProvider>(context, listen: false).fetchBanners();
@@ -93,7 +85,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     plansProvider.updateLoading(false);
   }
-  
+
   final List<String> _purchasedPlans = [
     'Gold Plan',
   ]; // Sample - you can load from SharedPreferences
@@ -379,7 +371,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-<<<<<<< HEAD
   Widget _buildLoanTextField({
     required TextEditingController controller,
     required String label,
@@ -441,7 +432,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _showGoldLoanDialog(BuildContext context) {
     final provider=Provider.of<ProfileDetailsProvider>(context,listen: false);
-    final  profile=provider?.profileData?.data?.profile;
+    final  profile=provider.profileData?.data?.profile;
     final TextEditingController nameController = TextEditingController(text: "${profile?.firstname} ${profile?.lastname}");
     final TextEditingController phoneController = TextEditingController(text: profile?.phone);
     final TextEditingController emailController = TextEditingController(text: profile?.email);
@@ -710,20 +701,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 
   Widget _buildPortfolioCard() {
-    final provider = Provider.of<ProfileDetailsProvider>(context);
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15),
-      padding: const EdgeInsets.all(16),
-=======
-
-  Widget _buildPortfolioCard() {
     final provider=Provider.of<ProfileDetailsProvider>(context);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(24),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -742,7 +724,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-<<<<<<< HEAD
 
           /// WALLET BALANCE ROW (Label + Button)
           Row(
@@ -791,7 +772,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           /// WALLET BALANCE VALUE
           Text(
             "₹${provider.profileData?.data?.profile?.goldBalanceValue ?? 0}",
-=======
+          ),
           Text(
             TokenStorage.translate("wallet_balance" ),
             style: GoogleFonts.poppins(
@@ -804,21 +785,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
           const SizedBox(height: 5),
           Text(
             "₹${provider.profileData?.data?.profile?.goldBalanceValue}",
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
             style: GoogleFonts.poppins(
               fontSize: 34,
               fontWeight: FontWeight.bold,
               color: const Color(0xFF0A0A0A),
             ),
           ),
-<<<<<<< HEAD
+
 
           const SizedBox(height: 20),
 
           /// BOTTOM INFO
-=======
           const SizedBox(height: 20),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -826,11 +804,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-<<<<<<< HEAD
+
                     TokenStorage.translate("gold_owned"),
-=======
-                   TokenStorage.translate("gold_owned"),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                     style: GoogleFonts.poppins(
                       fontSize: 12,
                       color: const Color(0xFF0A0A0A).withOpacity(0.7),
@@ -838,11 +813,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-<<<<<<< HEAD
+
                     "${provider.profileData?.data?.profile?.goldBalance ?? 0}g",
-=======
-                    "${provider.profileData?.data?.profile?.goldBalance}g",
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -863,11 +835,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-<<<<<<< HEAD
                     "${provider.profileData?.data?.profile?.total_returns ?? 0}",
-=======
-                    "${provider.profileData?.data?.profile?.total_returns}",
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -876,22 +844,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ],
               ),
-<<<<<<< HEAD
-=======
-
-
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
-            ],
+            ]
           ),
         ],
       ),
     );
   }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
   Widget _buildQuickInvest() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

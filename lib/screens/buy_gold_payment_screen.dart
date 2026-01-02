@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:meeragold/screens/buy_gold_screen.dart';
 import '../compenent/loader.dart';
 import '../constants/end_points.dart';
 import '../controllers/profile_details.dart';
 import '../screens/personal_details_screen.dart';
 import '../utils/token_storage.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
 import 'package:goldproject/controllers/profile_details.dart';
 import 'package:goldproject/screens/personal_details_screen.dart';
 import 'package:goldproject/utils/token_storage.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
@@ -20,6 +16,7 @@ import '../controllers/BuyGoldconvert.dart';
 import '../controllers/buy_gold.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../models/Guy_Gold_convert.dart';
+import 'buy_gold_screen.dart';
 import 'dashboard_screen.dart';
 import 'wallet_screen.dart';
 import 'history_screen.dart';
@@ -140,7 +137,6 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
       _isPaymentInProgress = false;
     }
   }
-<<<<<<< HEAD
   void _handlePaymentError(PaymentFailureResponse response) async {
     // Prevent duplicate processing
     if (_isPaymentInProgress) {
@@ -183,16 +179,12 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
 
     _isPaymentInProgress = false;
   }
+  //
+  // void _handlePaymentError(PaymentFailureResponse response) async {
+  //   // Prevent duplicate processing
+  //
+  // }
 
-
-=======
-
-  void _handlePaymentError(PaymentFailureResponse response) async {
-    // Prevent duplicate processing
-
-  }
-
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
   void _handleExternalWallet(ExternalWalletResponse response) {
     print("External wallet selected: ${response.walletName}");
   }
@@ -201,20 +193,17 @@ class _BuyGoldPaymentScreenState extends State<BuyGoldPaymentScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-<<<<<<< HEAD
+
           content: Text("payment Failed"),
-=======
-          content: Text(message),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+          // content: Text(message),
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 3),
         ),
       );
-<<<<<<< HEAD
+
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => BuyGoldScreen()));
-=======
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+
     }
   }
 

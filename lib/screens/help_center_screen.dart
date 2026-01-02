@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../compenent/loader.dart';
 import '../controllers/profile_details.dart';
 import '../utils/token_storage.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
 import 'package:goldproject/controllers/profile_details.dart';
 import 'package:goldproject/utils/token_storage.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../compenent/Custom_appbar.dart';

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../compenent/loader.dart';
 import '../screens/personal_details_screen.dart';
 import '../utils/token_storage.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
 import 'package:goldproject/screens/personal_details_screen.dart';
 import 'package:goldproject/utils/token_storage.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
@@ -151,11 +148,8 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
 
 
     return Container(
-<<<<<<< HEAD
       padding: const EdgeInsets.all(10),
-=======
-      padding: const EdgeInsets.all(20),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+      // padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
@@ -198,7 +192,6 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
                   size: 24,
                 ),
               ),
-<<<<<<< HEAD
               SizedBox(width: 60,),
 
               isPrimary? Container(
@@ -253,7 +246,6 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
           SizedBox(height: 5,),
           Text(TokenStorage.translate("Account Number"), style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
           Text(bank.accountNumber ?? "-", style: AppTextStyles.body12White70),
-=======
               SizedBox(width: 10,),
 
               Expanded(
@@ -280,11 +272,10 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
 
             ],
           ),
-
           const SizedBox(height: 8),
 
-          if (isPrimary)
-            Container(
+          // if(isPrimary)
+        isPrimary?Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: Colors.amber.withOpacity(0.2),
@@ -294,21 +285,18 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
                TokenStorage.translate("PRIMARY ACCOUNT"),
                 style: TextStyle(color: Colors.amber, fontSize: 12, fontWeight: FontWeight.w600),
               ),
-            ),
+            ):SizedBox(),
           const SizedBox(height: 12),
 
           Text(TokenStorage.translate("Account Number"), style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
           Text(bank.accountNumber ?? "-", style: GoogleFonts.poppins(color: Colors.white70)),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
           const SizedBox(height: 8),
 
           Text(TokenStorage.translate("IFSC Code"), style: GoogleFonts.poppins(color: Colors.white60, fontSize: 12)),
-<<<<<<< HEAD
           Text(bank.ifscCode ?? "-", style: AppTextStyles.body12White60),
-=======
+
           Text(bank.ifscCode ?? "-", style: GoogleFonts.poppins(color: Colors.white70)),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
           const SizedBox(height: 8),
           //
@@ -317,7 +305,6 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
 
           const SizedBox(height: 20),
           if (!isPrimary)
-<<<<<<< HEAD
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -376,9 +363,8 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
                     ),
                   ),
               ],
-            )
+            ),
 
-=======
     Row(
     children: [
     // EDIT button (only when NOT verified)
@@ -424,15 +410,11 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
     ),
     ],
     ),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
-        ],
-      ),
+    ],
+      );,
     );
   }
 
-  // -----------------------------
-  // MAIN BUILD
-  // -----------------------------
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProfileDetailsProvider>(context);
@@ -441,11 +423,8 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       appBar: CustomAppBar(
-<<<<<<< HEAD
+
         title: TokenStorage.translate("Select bank account"),
-=======
-        title: TokenStorage.translate("Select Bank Currency"),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         onBack: () {
           Navigator.pop(context);
         },
@@ -457,17 +436,15 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
           padding: const EdgeInsets.all(20),
           children: [
             if (banks.isEmpty)
-<<<<<<< HEAD
-              Text(TokenStorage.translate("No bank accounts yet"), style: AppTextStyles.loginSubHeading)
-=======
+              Text(TokenStorage.translate("No bank accounts yet"), style: AppTextStyles.loginSubHeading),
               Text(TokenStorage.translate("No bank accounts yet"), style: GoogleFonts.poppins(color: Colors.white60))
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
-            else
-              ...List.generate(banks.length,
-                      (i) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: _buildBankCard(provider, i),
-                  )),
+            else{
+    ...List.generate(banks.length,
+    (i) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: _buildBankCard(provider, i),
+    )),
+    }
 
             const SizedBox(height: 20),
 
@@ -494,15 +471,14 @@ class _BankAccountsScreenState extends State<BankAccountsScreen>  with RouteAwar
                   elevation: 8,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 ),
-<<<<<<< HEAD
                 child: Text(TokenStorage.translate("Add Bank Account"), style: AppTextStyles.buttonText.copyWith(fontSize: 16)),
-=======
                 child: Text(TokenStorage.translate("Add Bank Account"), style: AppTextStyles.buttonText),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+
               ),
             ),
             SizedBox( height:10),
           ],
+
         ),
     );
   }

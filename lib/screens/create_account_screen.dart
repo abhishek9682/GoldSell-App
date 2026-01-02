@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../utils/token_storage.dart';
-=======
 import 'package:goldproject/utils/token_storage.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/custom_style.dart';
 import '../compenent/loader.dart';
@@ -14,11 +11,7 @@ import 'login_screen.dart';
 class CreateAccountScreen extends StatefulWidget {
   final String phoneNumber;
 
-<<<<<<< HEAD
    CreateAccountScreen({
-=======
-  const CreateAccountScreen({
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     super.key,
     required this.phoneNumber,
   });

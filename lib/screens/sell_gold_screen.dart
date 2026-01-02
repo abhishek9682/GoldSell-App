@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../compenent/loader.dart';
 import '../screens/personal_details_screen.dart';
 import '../screens/sell_gold_payment_screen.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
 import 'package:goldproject/screens/personal_details_screen.dart';
 import 'package:goldproject/screens/sell_gold_payment_screen.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../api_client/apiClient.dart';
-=======
 import 'package:goldproject/api_client/apiClient.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import '../constants/end_points.dart';
 import '../models/investment_plans.dart';
 

@@ -1,24 +1,18 @@
-<<<<<<< HEAD
-// ------------------------------
-//          IMPORTS
-// ------------------------------
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'helpers/security_storage.dart';
+import 'screens/splash_screen.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-
 import 'controllers/loan_provider.dart';
 import 'helpers/security_storage.dart';
 import 'screens/splash_screen.dart';
 import 'screens/app_lock_screen.dart';
 import 'utils/token_storage.dart';
-
-// controllers
-=======
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,7 +21,6 @@ import 'package:goldproject/screens/Privacy_Policy_screen.dart';
 import 'package:goldproject/utils/token_storage.dart';
 import 'package:provider/provider.dart';
 import 'compenent/snackbar.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'controllers/BuyGoldconvert.dart';
 import 'controllers/Delete_Bank.dart';
 import 'controllers/InvestmentPlansProvider.dart';
@@ -53,12 +46,7 @@ import 'controllers/update_profile.dart';
 import 'controllers/user_registration.dart';
 import 'controllers/varify_otp.dart';
 import 'controllers/venders.dart';
-<<<<<<< HEAD
 
-
-// ------------------------------
-//  FIREBASE BACKGROUND HANDLER
-// ------------------------------
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("🔥 Background Message: ${message.notification?.title}");
@@ -132,16 +120,12 @@ Future<void> main() async {
   await TokenStorage.init();
   await _loadBiometricSetting();
 
-=======
-import 'helpers/security_storage.dart';
-import 'screens/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await TokenStorage.init();
   await _loadBiometricSetting();
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -149,8 +133,8 @@ void main() async{
     ),
   );
 
-<<<<<<< HEAD
-  runApp(const MeeraGoldApp());
+
+  runApp( MeeraGoldApp());
 }
 
 // ------------------------------
@@ -241,7 +225,6 @@ class _MeeraGoldAppState extends State<MeeraGoldApp> {
         theme: ThemeData(primarySwatch: Colors.amber),
         home: checkBiometric ? AppLockScreen() : SplashScreen(),
       ),
-=======
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => LanguageProvider()),
@@ -273,6 +256,7 @@ class _MeeraGoldAppState extends State<MeeraGoldApp> {
      child: const MeeraGoldApp(),)
   );
 }
+
 Future<void> _loadBiometricSetting() async {
   checkBiometric = await SecurityStorage.isBiometricEnabled();
 }
@@ -310,7 +294,6 @@ class MeeraGoldApp extends StatelessWidget {
       ),
 
       home: checkBiometric?AppLockScreen():SplashScreen(),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
     );
   }
 }
