@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="firebase_database_url">https://meeragold.firebaseio.com</string>
+    <string name="google_api_key">AIzaSyD-kb-BSWPkWYO2lxQP9d0j4v8-U19kAWg</string>
+    <string name="google_app_id">1:321569287178:android:53832240f0ba49ffd5c3f3</string>
+    <string name="google_storage_bucket">meeragold.firebasestorage.app</string>
+    <string name="gcm_defaultSenderId">321569287178</string>
+    <string name="project_id">meeragold</string>
+</resources>

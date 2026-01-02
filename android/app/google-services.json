@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "321569287178",
+    "project_id": "meeragold",
+    "storage_bucket": "meeragold.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321569287178:android:53832240f0ba49ffd5c3f3",
+        "android_client_info": {
+          "package_name": "com.meeragold.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-kb-BSWPkWYO2lxQP9d0j4v8-U19kAWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321569287178:android:b8b41149c3c79dbed5c3f3",
+        "android_client_info": {
+          "package_name": "com.meeragold.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-kb-BSWPkWYO2lxQP9d0j4v8-U19kAWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

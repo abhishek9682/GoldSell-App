@@ -1,0 +1,72 @@
+class GoldPurchaseResponse {
+  final String status;
+  final GoldPurchaseData? data;
+
+  GoldPurchaseResponse({
+    required this.status,
+    this.data,
+  });
+
+  factory GoldPurchaseResponse.fromJson(Map<String, dynamic> json) {
+    return GoldPurchaseResponse(
+      status: json['status'] ?? '',
+      data: json['data'] != null
+          ? GoldPurchaseData.fromJson(json['data'])
+          : null,
+    );
+  }
+}
+
+class GoldPurchaseData {
+  final String trxId;
+  final String razorpayOrderId;     // ⭐ NEW
+  final String razorpayKeyId;       // ⭐ NEW
+
+  final double goldGramsPurchased;
+  final String goldBalance;
+  final double goldValue;
+  final double gstAmount;
+  final double tdsAmount;
+  final double tcsAmount;
+  final double totalTaxAmount;
+  final double amountPaid;
+  final String message;
+
+  GoldPurchaseData({
+    required this.trxId,
+    required this.razorpayOrderId,  // ⭐ NEW
+    required this.razorpayKeyId,    // ⭐ NEW
+    required this.goldGramsPurchased,
+    required this.goldBalance,
+    required this.goldValue,
+    required this.gstAmount,
+    required this.tdsAmount,
+    required this.tcsAmount,
+    required this.totalTaxAmount,
+    required this.amountPaid,
+    required this.message,
+  });
+
+  static double cleanDouble(dynamic value) {
+    if (value == null) return 0.0;
+    return double.tryParse(value.toString().replaceAll(",", "")) ?? 0.0;
+  }
+
+  factory GoldPurchaseData.fromJson(Map<String, dynamic> json) {
+    return GoldPurchaseData(
+      trxId: json['trx_id']?.toString() ?? '',
+      razorpayOrderId: json['razorpay_order_id']?.toString() ?? '',  // ⭐ NEW
+      razorpayKeyId: json['razorpay_key_id']?.toString() ?? '',      // ⭐ NEW
+
+      goldGramsPurchased: cleanDouble(json['gold_grams']),
+      goldBalance: json['gold_balance']?.toString() ?? "0",
+      goldValue: cleanDouble(json['gold_value']),
+      gstAmount: cleanDouble(json['gst_amount']),
+      tdsAmount: cleanDouble(json['tds_amount']),
+      tcsAmount: cleanDouble(json['tcs_amount']),
+      totalTaxAmount: cleanDouble(json['total_tax_amount']),
+      amountPaid: cleanDouble(json['amount']),
+      message: json['message']?.toString() ?? '',
+    );
+  }
+}
