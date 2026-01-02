@@ -2,10 +2,7 @@ const String language = "/languages";
 const String languageData = "/language/";
 const String sendsOtp = "/send-otp";
 const String verifyOtps = "/verify-otp";
-<<<<<<< HEAD
 const String fcmToken = "/firebase-token/save";
-=======
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 const String userRegistration = "/complete-profile";
 const String getProfileDetails = "/profile";
 const String updateProfiles = "/update-profile";
@@ -36,7 +33,4 @@ const String otpResends="/verify-otp";
 const String varifyRozaPay="/razorpay/verify";
 const String paymentSuccees="/test/razorpay/success";
 const String paymentFailed="/test/razorpay/failure";
-<<<<<<< HEAD
 const String loan="/gold-enquiry/submit";
-=======
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6

@@ -1,91 +1,81 @@
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'helpers/security_storage.dart';
-import 'screens/splash_screen.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-import 'controllers/loan_provider.dart';
+
+import 'controllers/user_registration.dart';
 import 'helpers/security_storage.dart';
+import 'utils/token_storage.dart';
 import 'screens/splash_screen.dart';
 import 'screens/app_lock_screen.dart';
-import 'utils/token_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:goldproject/screens/app_lock_screen.dart';
-import 'package:goldproject/screens/Privacy_Policy_screen.dart';
-import 'package:goldproject/utils/token_storage.dart';
-import 'package:provider/provider.dart';
-import 'compenent/snackbar.dart';
-import 'controllers/BuyGoldconvert.dart';
-import 'controllers/Delete_Bank.dart';
-import 'controllers/InvestmentPlansProvider.dart';
-import 'controllers/Term_condition.dart';
-import 'controllers/add_bank_account.dart';
-import 'controllers/add_new_nominee.dart';
-import 'controllers/banner_provider.dart';
-import 'controllers/buy_gold.dart';
-import 'controllers/condition_policy.dart';
-import 'controllers/enroll_investment.dart';
-import 'controllers/gold_conversion.dart';
-import 'controllers/help_center_controllar.dart';
-import 'controllers/language_data_provider.dart';
-import 'controllers/language_provider.dart';
-import 'controllers/notifiacation_provier.dart';
-import 'controllers/otp_resend.dart';
-import 'controllers/otp_response.dart';
-import 'controllers/profile_details.dart';
-import 'controllers/sell_gold.dart';
-import 'controllers/submit_kyc.dart';
-import 'controllers/transaction_list.dart';
-import 'controllers/update_profile.dart';
-import 'controllers/user_registration.dart';
-import 'controllers/varify_otp.dart';
-import 'controllers/venders.dart';
 
+// PROVIDERS
+import 'controllers/language_provider.dart';
+import 'controllers/language_data_provider.dart';
+import 'controllers/otp_response.dart';
+import 'controllers/varify_otp.dart';
+import 'controllers/otp_resend.dart';
+import 'controllers/profile_details.dart';
+import 'controllers/transaction_list.dart';
+import 'controllers/add_bank_account.dart';
+import 'controllers/update_profile.dart';
+import 'controllers/add_new_nominee.dart';
+import 'controllers/submit_kyc.dart';
+import 'controllers/gold_conversion.dart';
+import 'controllers/sell_gold.dart';
+import 'controllers/InvestmentPlansProvider.dart';
+import 'controllers/enroll_investment.dart';
+import 'controllers/Delete_Bank.dart';
+import 'controllers/buy_gold.dart';
+import 'controllers/help_center_controllar.dart';
+import 'controllers/condition_policy.dart';
+import 'controllers/notifiacation_provier.dart';
+import 'controllers/venders.dart';
+import 'controllers/banner_provider.dart';
+import 'controllers/BuyGoldconvert.dart';
+import 'controllers/loan_provider.dart';
+import 'controllers/Term_condition.dart';
+
+/// ===============================
+/// FIREBASE BACKGROUND HANDLER
+/// ===============================
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("🔥 Background Message: ${message.notification?.title}");
 }
 
-// ------------------------------
-//   LOCAL NOTIFICATION PLUGIN
-// ------------------------------
+/// ===============================
+/// LOCAL NOTIFICATION INSTANCE
+/// ===============================
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 
+bool checkBiometric = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Firebase init
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
+  // await GetStorage.init();
+  // await TokenStorage.init();
+  await _loadBiometricSetting();
 
-  // Background notification handler
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(
+      _firebaseMessagingBackgroundHandler);
 
-  // ------------------------------
-  //  LOCAL NOTIFICATION INIT
-  // ------------------------------
-  const AndroidInitializationSettings initSettingsAndroid =
+  const AndroidInitializationSettings androidSettings =
   AndroidInitializationSettings('@mipmap/ic_launcher');
 
   const InitializationSettings initSettings =
-  InitializationSettings(android: initSettingsAndroid);
+  InitializationSettings(android: androidSettings);
 
   await flutterLocalNotificationsPlugin.initialize(initSettings);
 
-  // ------------------------------
-  //   REGISTER NOTIFICATION CHANNEL
-  // ------------------------------
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel',
     'High Importance Notifications',
-    description: "This channel is used for important notifications.",
     importance: Importance.max,
   );
 
@@ -94,9 +84,6 @@ Future<void> main() async {
       AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-  // ------------------------------
-  //  FOREGROUND MESSAGE LISTENER
-  // ------------------------------
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     flutterLocalNotificationsPlugin.show(
       DateTime.now().millisecondsSinceEpoch ~/ 1000,
@@ -104,28 +91,16 @@ Future<void> main() async {
       message.notification?.body,
       const NotificationDetails(
         android: AndroidNotificationDetails(
-          "high_importance_channel",
-          "High Importance Notifications",
+          'high_importance_channel',
+          'High Importance Notifications',
           importance: Importance.max,
           priority: Priority.high,
-          playSound: true,
         ),
       ),
+
     );
   });
 
-
-  // Storage Init
-  await GetStorage.init();
-  await TokenStorage.init();
-  await _loadBiometricSetting();
-
-
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  await TokenStorage.init();
-  await _loadBiometricSetting();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -133,66 +108,28 @@ void main() async{
     ),
   );
 
-
-  runApp( MeeraGoldApp());
+  runApp(const MeeraGoldApp());
 }
 
-// ------------------------------
-//  BIOMETRIC CHECK
-// ------------------------------
-bool checkBiometric = false;
-
+/// ===============================
+/// BIOMETRIC CHECK
+/// ===============================
 Future<void> _loadBiometricSetting() async {
   checkBiometric = await SecurityStorage.isBiometricEnabled();
 }
 
-
-// ------------------------------
-//     APP ROOT WIDGET
-// ------------------------------
-class MeeraGoldApp extends StatefulWidget {
-  const MeeraGoldApp({Key? key}) : super(key: key);
-
-  @override
-  State<MeeraGoldApp> createState() => _MeeraGoldAppState();
-}
-
-class _MeeraGoldAppState extends State<MeeraGoldApp> {
-  @override
-  void initState() {
-    super.initState();
-    requestPermission();
-    checkInitialMessage();
-  }
-
-  // Request Firebase Notification Permission
-  Future<void> requestPermission() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    print("🔔 Notification Permission: ${settings.authorizationStatus}");
-  }
-
-  // Check notification launched from terminated state
-  Future<void> checkInitialMessage() async {
-    RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
-
-    if (initialMessage != null) {
-      print("📌 App opened from notification: ${initialMessage.data}");
-    }
-  }
+/// ===============================
+/// ROOT APP
+/// ===============================
+class MeeraGoldApp extends StatelessWidget {
+  const MeeraGoldApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageDataProvider()),
         ChangeNotifierProvider(create: (_) => OtpProvider()),
         ChangeNotifierProvider(create: (_) => OtpVarification()),
         ChangeNotifierProvider(create: (_) => CompleteProfileProvider()),
@@ -212,7 +149,6 @@ class _MeeraGoldAppState extends State<MeeraGoldApp> {
         ChangeNotifierProvider(create: (_) => PrivacyPolicyProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => MerchantProvider()),
-        ChangeNotifierProvider(create: (_) => LanguageDataProvider()),
         ChangeNotifierProvider(create: (_) => TermsConditionsProvider()),
         ChangeNotifierProvider(create: (_) => BannerProvider()),
         ChangeNotifierProvider(create: (_) => BuyGoldConversion()),
@@ -223,77 +159,10 @@ class _MeeraGoldAppState extends State<MeeraGoldApp> {
         title: 'Meera Gold',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.amber),
-        home: checkBiometric ? AppLockScreen() : SplashScreen(),
+        home: checkBiometric
+            ? const AppLockScreen()
+            : const SplashScreen(),
       ),
-  runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => LanguageProvider()),
-      ChangeNotifierProvider(create: (_) => OtpProvider()),
-      ChangeNotifierProvider(create: (_) => OtpVarification()),
-      ChangeNotifierProvider(create: (_) => CompleteProfileProvider()),
-      ChangeNotifierProvider(create: (_) => TransactionProvider()),
-      ChangeNotifierProvider(create: (_) => ProfileDetailsProvider()),
-      ChangeNotifierProvider(create: (_) => BankAccountProvider()),
-      ChangeNotifierProvider(create: (_) => UpdateProfiles()),
-      ChangeNotifierProvider(create: (_) => NomineeProfileProvider()),
-      ChangeNotifierProvider(create: (_) => SubmitKycProvider()),
-      ChangeNotifierProvider(create: (_) => GoldDetails()),
-      ChangeNotifierProvider(create: (_) => GoldSellProvider()),
-      ChangeNotifierProvider(create: (_) => InvestmentPlansProvider()),
-      ChangeNotifierProvider(create: (_) => EnrollInvestmentProvider()),
-      ChangeNotifierProvider(create: (_) => DeleteAccount()),
-      ChangeNotifierProvider(create: (_) => BuyGold()),
-      ChangeNotifierProvider(create: (_) => HelpCenterProvider()),
-      ChangeNotifierProvider(create: (_) => PrivacyPolicyProvider()),
-      ChangeNotifierProvider(create: (_) =>NotificationProvider()),
-      ChangeNotifierProvider(create: (_) => MerchantProvider()),
-      ChangeNotifierProvider(create: (_) => LanguageDataProvider()),
-      ChangeNotifierProvider(create: (_) => TermsConditionsProvider()),
-      ChangeNotifierProvider(create: (_) => BannerProvider()),
-      ChangeNotifierProvider(create: (_) => BuyGoldConversion()),
-      ChangeNotifierProvider(create: (_) => OtpResendProvider()),
-   ],
-     child: const MeeraGoldApp(),)
-  );
-}
-
-Future<void> _loadBiometricSetting() async {
-  checkBiometric = await SecurityStorage.isBiometricEnabled();
-}
-bool checkBiometric=false;
-class MeeraGoldApp extends StatelessWidget {
-  const MeeraGoldApp({Key? key}) : super(key: key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    final langProvider = Provider.of<LanguageProvider>(context);
-
-    return MaterialApp(
-      title: 'Meera Gold',
-      debugShowCheckedModeBanner: false,
-      //
-      // // ⭐ ADD THIS
-      // locale: langProvider.locale,
-      //
-      // // ⭐ Make sure your supported locales match your ARB files
-      // supportedLocales: const [
-      //   Locale('en'),
-      //   Locale('hi'),
-      // ],
-      //
-      // localizationsDelegates: const [
-      //   AppLocalizations.delegate,
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      //   GlobalCupertinoLocalizations.delegate,
-      // ],
-
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
-
-      home: checkBiometric?AppLockScreen():SplashScreen(),
     );
   }
 }

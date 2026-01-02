@@ -324,11 +324,9 @@ class _NearbyVendorsScreenState extends State<NearbyVendorsScreen> {
       child: Padding(
         padding: const EdgeInsets.only(top: 60),
         child: Text(
-<<<<<<< HEAD
           TokenStorage.translate("No vendors found nearby."),
-=======
-          "No vendors found nearby.",
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+
+          // "No vendors found nearby.",
           style:
           AppTextStyles.subHeading.copyWith(color: Colors.white70),
         ),

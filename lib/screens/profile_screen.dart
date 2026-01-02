@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../compenent/loader.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/bottum_bar.dart';
@@ -497,11 +494,9 @@ class _ProfileScreenState extends State<ProfileScreen>  with RouteAware{
           ),
         ),
         content: Text(
-<<<<<<< HEAD
-          '${TokenStorage.translate("Are you sure?")}',
-=======
-          'Are you sure you want to logout?',
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+          '${TokenStorage.translate("Are you sure you want to logout?")}',
+
+          // 'Are you sure you want to logout?',
           style: GoogleFonts.poppins(
             color: Colors.white70,
           ),

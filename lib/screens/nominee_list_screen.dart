@@ -1,15 +1,13 @@
 // screens/nominee_list_screen.dart
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
+
 import '../models/get_profile_details.dart';
 import '../screens/personal_details_screen.dart';
 import '../utils/token_storage.dart';
-=======
 import 'package:goldproject/models/get_profile_details.dart';
 import 'package:goldproject/screens/personal_details_screen.dart';
 import 'package:goldproject/utils/token_storage.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';

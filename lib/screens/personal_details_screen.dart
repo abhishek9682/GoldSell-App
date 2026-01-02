@@ -2,11 +2,8 @@ import 'dart:io';
 import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../compenent/loader.dart';
-=======
 import 'package:goldproject/compenent/loader.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:provider/provider.dart';
 import '../compenent/Custom_appbar.dart';
 import '../compenent/bottum_bar.dart';
@@ -827,7 +824,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         Text(TokenStorage.translate("Personal Information"),
             style: AppTextStyles.subHeading1),
         const SizedBox(height: 16),
-<<<<<<< HEAD
         Row(
           children: [
             Expanded(
@@ -863,7 +859,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         //   icon: Icons.person_outline,
         //   errorText: _fieldErrors['lastName'],
         // ),
-=======
+
         _buildTextField(
           label: TokenStorage.translate("Firstname").toUpperCase(),
           controller: _firstNameController,
@@ -877,7 +873,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           icon: Icons.person_outline,
           errorText: _fieldErrors['lastName'],
         ),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         const SizedBox(height: 16),
         _buildTextField(
           label: TokenStorage.translate("Email Address"),
@@ -971,7 +966,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           ],
         ),
         const SizedBox(height: 16),
-<<<<<<< HEAD
         Text("Idenetity Number",style: AppTextStyles.subHeading1,),
         const SizedBox(height: 16),
 
@@ -992,7 +986,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
           keyboardType: TextInputType.number,
           maxLength: 12,
           errorText: _fieldErrors['aadhar'],
-=======
+        ),
         Row(
           children: [
             Expanded(
@@ -1018,7 +1012,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               ),
             ),
           ],
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
         ),
       ],
     );
@@ -1027,33 +1020,40 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   Widget _displayDocuments() {
     final profileProvider =
     Provider.of<ProfileDetailsProvider>(context, listen: true);
+
     final kycDocs =
         profileProvider.profileData?.data?.profile?.kycDocuments ?? [];
 
-    return kycDocs.isEmpty ? SizedBox() : Column(
+    if (kycDocs.isEmpty) {
+      return const SizedBox();
+    }
+
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(TokenStorage.translate("Uploaded Documents"),
-            style: AppTextStyles.subHeading1),
+        Text(
+          TokenStorage.translate("Uploaded Documents"),
+          style: AppTextStyles.subHeading1,
+        ),
         const SizedBox(height: 12),
-        if (kycDocs.isEmpty)
-          Text("No documents uploaded yet", style: AppTextStyles.subHeading),
+
         ...kycDocs.map((group) {
-          String name = group.kycName ?? "";
-          String? fileUrl =
+          final String name = group.kycName ?? "";
+          final String? fileUrl =
           (group.documents != null && group.documents!.isNotEmpty)
               ? group.documents!.first.fileUrl
               : null;
-          kycStatus = group.status ?? "Pending";
-<<<<<<< HEAD
+
+          final String status = group.status ?? "Pending";
+
           return InkWell(
-            onTap: (){
+            onTap: () {
               print("kycstatus===========${group.status}");
-              if(group.status=="rejected"){
+              if (group.status == "rejected") {
                 setState(() {
-                  _currentStep=1;
+                  _currentStep = 1;
                 });
-                }
+              }
             },
             child: Column(
               children: [
@@ -1061,28 +1061,17 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
                   title: name,
                   subtitle: "Upload $name",
                   imageUrl: fileUrl,
-                  status: kycStatus,
+                  status: status,
                 ),
                 const SizedBox(height: 10),
               ],
             ),
-=======
-          return Column(
-            children: [
-              _displayDocumentUploadCard(
-                title: name,
-                subtitle: "Upload $name",
-                imageUrl: fileUrl,
-                status: kycStatus,
-              ),
-              const SizedBox(height: 10),
-            ],
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
           );
         }).toList(),
       ],
     );
   }
+
 
   Widget _buildKYCDocuments() {
     final profileProvider =

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../controllers/profile_details.dart';
 import '../screens/personal_details_screen.dart';
 import '../utils/token_storage.dart';
-=======
 import 'package:goldproject/controllers/profile_details.dart';
 import 'package:goldproject/screens/personal_details_screen.dart';
 import 'package:goldproject/utils/token_storage.dart';
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../controllers/InvestmentPlansProvider.dart';
@@ -481,7 +478,6 @@ class PlanDetailScreen extends StatelessWidget {
                   const SizedBox(height: 15),
 
                   // ******** BANK SELECTION DROPDOWN ********
-<<<<<<< HEAD
                   // Text(
                   //   "Select Bank Account",
                   //   style: GoogleFonts.poppins(
@@ -521,7 +517,6 @@ class PlanDetailScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-=======
                   Text(
                     "Select Bank Account",
                     style: GoogleFonts.poppins(
@@ -561,13 +556,11 @@ class PlanDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
                   const SizedBox(height: 15),
 
                   // ******** AUTO RENEW SWITCH ********
-<<<<<<< HEAD
-                  // Row(
+    // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //   children: [
                   //     Text(
@@ -587,7 +580,6 @@ class PlanDetailScreen extends StatelessWidget {
                   //     ),
                   //   ],
                   // ),
-=======
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -608,7 +600,6 @@ class PlanDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
 
                   const SizedBox(height: 15),
 
@@ -627,13 +618,11 @@ class PlanDetailScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         _infoRow("Start Date:", _formattedNow()),
                         const SizedBox(height: 8),
-<<<<<<< HEAD
                         // _infoRow("Auto-Renewal:",
                         //     autoRenewEnabled ? "Enabled" : "Disabled"),
-=======
+
                         _infoRow("Auto-Renewal:",
                             autoRenewEnabled ? "Enabled" : "Disabled"),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
                       ],
                     ),
                   ),

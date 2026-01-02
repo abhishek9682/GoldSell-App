@@ -352,13 +352,12 @@ class _RewardsScreenState extends State<RewardsScreen> {
                   // STATIC UI BELOW (unchanged)
                   _buildRewardItem(
                     icon: '🤝',
-
                     title: TokenStorage.translate("Referral Commission"),
                     description: TokenStorage.translate("Earn when your friends invest"),
                     status: TokenStorage.translate("View Details"),
-                    title: 'Referral Commission',
-                    description: 'Earn when your friends invest',
-                    status: 'View Details',
+                    // title: 'Referral Commission',
+                    // description: 'Earn when your friends invest',
+                    // status: 'View Details',
                     statusColor: const Color(0xFFFFD700),
                   ),
 
@@ -382,7 +381,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
                       child: Text(
 
                         TokenStorage.translate("View Reward History"),
-                        'View Reward History',
+                        // 'View Reward History',
                         style: AppTextStyles.copyButton16W600Gold,
                       ),
                     ),
@@ -434,11 +433,8 @@ class _RewardsScreenState extends State<RewardsScreen> {
         children: [
           const Text('🎉', style: TextStyle(fontSize: 48)),
           const SizedBox(height: 12),
-<<<<<<< HEAD
             Text(TokenStorage.translate(TokenStorage.translate("Total Rewards Earned")), style: AppTextStyles.body14W500White70.copyWith(color: Colors.black87)),
-=======
-          Text('Total Rewards Earned', style: AppTextStyles.body14W500White70.copyWith(color: Colors.black87)),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+          // Text('Total Rewards Earned', style: AppTextStyles.body14W500White70.copyWith(color: Colors.black87)),
           const SizedBox(height: 8),
 
           // DYNAMIC AMOUNT
@@ -450,11 +446,8 @@ class _RewardsScreenState extends State<RewardsScreen> {
           ),
 
           const SizedBox(height: 8),
-<<<<<<< HEAD
           Text(TokenStorage.translate("Keep investing to earn more!"),
-=======
-          Text('Keep investing to earn more!',
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+          // Text('Keep investing to earn more!',
               style: AppTextStyles.body14W500White70.copyWith(color: Colors.black54, fontSize: 12)),
         ],
       ),
@@ -533,11 +526,8 @@ class _RewardsScreenState extends State<RewardsScreen> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 80),
-<<<<<<< HEAD
         child: Text(TokenStorage.translate("No rewards earned yet."), style: AppTextStyles.body14White70),
-=======
-        child: Text("No rewards earned yet.", style: AppTextStyles.body14White70),
->>>>>>> d7fd81377560e5863f8e9a99cef7f586049698c6
+        // child: Text("No rewards earned yet.", style: AppTextStyles.body14White70),
       ),
     );
   }
