@@ -860,19 +860,19 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         //   errorText: _fieldErrors['lastName'],
         // ),
 
-        _buildTextField(
-          label: TokenStorage.translate("Firstname").toUpperCase(),
-          controller: _firstNameController,
-          icon: Icons.person_outline,
-          errorText: _fieldErrors['firstName'],
-        ),
-        const SizedBox(height: 16),
-        _buildTextField(
-          label: TokenStorage.translate("Lastname").toUpperCase(),
-          controller: _lastNameController,
-          icon: Icons.person_outline,
-          errorText: _fieldErrors['lastName'],
-        ),
+        // _buildTextField(
+        //   label: TokenStorage.translate("Firstname").toUpperCase(),
+        //   controller: _firstNameController,
+        //   icon: Icons.person_outline,
+        //   errorText: _fieldErrors['firstName'],
+        // ),
+        // const SizedBox(height: 16),
+        // _buildTextField(
+        //   label: TokenStorage.translate("Lastname").toUpperCase(),
+        //   controller: _lastNameController,
+        //   icon: Icons.person_outline,
+        //   errorText: _fieldErrors['lastName'],
+        // ),
         const SizedBox(height: 16),
         _buildTextField(
           label: TokenStorage.translate("Email Address"),

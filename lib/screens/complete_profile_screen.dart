@@ -164,11 +164,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                  ),
                ],
              ),
-              _buildInputField(
-                  TokenStorage.translate("Firstname"), _firstNameController, Icons.person_outline),
-              const SizedBox(height: 20),
-              _buildInputField(
-                  TokenStorage.translate("Lastname"), _lastNameController, Icons.person_outline),
+              // _buildInputField(
+              //     TokenStorage.translate("Firstname"), _firstNameController, Icons.person_outline),
+              // const SizedBox(height: 20),
+              // _buildInputField(
+              //     TokenStorage.translate("Lastname"), _lastNameController, Icons.person_outline),
               const SizedBox(height: 20),
               _buildInputField(
                   TokenStorage.translate("Email Address"), _emailController, Icons.email_outlined,

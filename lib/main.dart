@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/user_registration.dart';
+import 'firebase_options.dart';
 import 'helpers/security_storage.dart';
 import 'utils/token_storage.dart';
 import 'screens/splash_screen.dart';
@@ -58,8 +59,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // await Firebase.initializeApp();
-  // await GetStorage.init();
-  // await TokenStorage.init();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    print('------------Firebase initialization error: $e');
+    // Consider showing a user-friendly error screen
+  }
+  await GetStorage.init();
+  await TokenStorage.init();
   await _loadBiometricSetting();
 
   FirebaseMessaging.onBackgroundMessage(

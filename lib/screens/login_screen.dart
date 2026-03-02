@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../screens/Privacy_Policy_screen.dart';
-import 'package:goldproject/screens/Privacy_Policy_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../compenent/custom_style.dart';
@@ -17,7 +16,6 @@ import 'create_account_screen.dart';
 
 
 class LoginScreen extends StatefulWidget {
-
   const LoginScreen({super.key,});
 
   @override

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 Map<String, dynamic> _langData = <String,dynamic>{};
 class TokenStorage {
   static const String _keyToken = "auth_token";
